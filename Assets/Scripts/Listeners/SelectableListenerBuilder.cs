@@ -7,11 +7,7 @@ public class SelectableListenerBuilder
 {
     private ISelectableIngester ingester;
 
-    private Vector2Int origin = new Vector2Int(0, 0);
-
     private int numTargets = 1;
-
-    private int range = 1;
 
     private bool exact = false;
 
@@ -26,18 +22,8 @@ public class SelectableListenerBuilder
         return this;
     }
 
-    public SelectableListenerBuilder WithRange(int range) {
-        this.range = range;
-        return this;
-    }
-
     public SelectableListenerBuilder WithExactSelection(bool exact) {
         this.exact = exact;
-        return this;
-    }
-
-    public SelectableListenerBuilder WithOrigin(Vector2Int origin) {
-        this.origin = origin;
         return this;
     }
 
@@ -47,10 +33,10 @@ public class SelectableListenerBuilder
     }
 
     public GridSelectionListener Build() {
-        return new GridSelectionListener(ingester, origin, numTargets, range, exact, filters);
+        return new GridSelectionListener(ingester, numTargets, exact, filters);
     }
 
     public DefaultListener BuildDefault() {
-        return new DefaultListener(ingester, origin, numTargets, range, exact, filters);
+        return new DefaultListener(ingester, numTargets, exact, filters);
     }
 }

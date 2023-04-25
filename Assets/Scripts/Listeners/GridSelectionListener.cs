@@ -10,11 +10,7 @@ public class GridSelectionListener {
 
     private ISelectableIngester ingester;
 
-    private Vector2Int origin;
-
     private int numTargets = 1;
-
-    private int range = 1;
 
     private bool exact = false;
 
@@ -22,12 +18,10 @@ public class GridSelectionListener {
 
     public GridSelectionListener() { }
 
-    public GridSelectionListener(ISelectableIngester ingester, Vector2Int origin, int numTargets, int range, bool exact, List<ISelectableFilter> filters) {
+    public GridSelectionListener(ISelectableIngester ingester, int numTargets, bool exact, List<ISelectableFilter> filters) {
         this.ingester = ingester;
-        this.origin = origin;
         this.numTargets = numTargets;
         this.exact = exact;
-        this.range = range;
         this.filters = filters;
     }
 
@@ -80,7 +74,7 @@ public class GridSelectionListener {
 
     protected virtual void SetEnabledSelectables() {
         foreach(Selectable selectable in SelectionManager.GetInstance().GetSelectables()) {
-            selectable.SetSelectable(InRange(selectable) && PassesFilters(selectable));
+            selectable.SetSelectable(PassesFilters(selectable));
         } 
     }
 
@@ -96,10 +90,5 @@ public class GridSelectionListener {
         }
         
         return true;
-    }
-
-    private bool InRange(Selectable selectable) {
-        int distance = selectable.Space.GetDistance(origin);
-        return distance != 0 && distance <= range;
     }
 }

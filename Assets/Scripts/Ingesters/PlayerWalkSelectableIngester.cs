@@ -9,8 +9,7 @@ public class PlayerWalkSelectableIngester : MonoBehaviour, ISelectableIngester
     public GridMover gridMover;
 
     public void BeginListening() {
-        GridSelectionListener listener = new SelectableListenerBuilder(this).WithRange(range)
-                                                                            .WithOrigin(gridMover.currentGridPos)
+        GridSelectionListener listener = new SelectableListenerBuilder(this).WithFilter(new RangeFilter(gridMover.currentGridPos, range))
                                                                             .Build();
         SelectionManager.GetInstance().AssignListener(listener);
     }
