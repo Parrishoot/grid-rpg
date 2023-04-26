@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GridSpace: MonoBehaviour
 {
+    [field:SerializeField]
     public Vector2Int CellCoords { get; set; }
 
     public GridSpaceSelectable gridSpaceSelectable;

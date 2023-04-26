@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GridMover : MonoBehaviour
 {
-    public Vector2Int targetGridPos = new Vector2Int(0, 0);
+    public Vector2Int TargetGridPos { get; set; }
 
-    public Vector2Int currentGridPos = new Vector2Int(0, 0);
+    public Vector2Int CurrentGridPos { get; set; }
 
     public float movementSpeed = 10f;
 
@@ -17,16 +17,14 @@ public class GridMover : MonoBehaviour
     public void Start() {
         gridManager = GridManager.GetInstance();
         selectable = GetComponent<Selectable>();
-        transform.position = gridManager.GetCellPos(currentGridPos, transform.position.y);
-        targetGridPos = currentGridPos;
-        gridManager.GetGridSpaceAtCell(targetGridPos).SetOccupant(selectable);
+        InitPosition();
     }
 
     public void Update() {
 
-        if(!gridManager.IsAtCellCenter(transform.position, targetGridPos)) {
+        if(!gridManager.IsAtCellCenter(transform.position, TargetGridPos)) {
 
-            Vector3 targetCellWorldPos = gridManager.GetCellPos(targetGridPos);
+            Vector3 targetCellWorldPos = gridManager.GetCellPos(TargetGridPos);
 
             if(transform.position.x != targetCellWorldPos.x) {
                 transform.Translate(GetFrameMovement(transform.position.x, targetCellWorldPos.x), 0, 0);
@@ -35,9 +33,9 @@ public class GridMover : MonoBehaviour
                 transform.Translate(0, 0, GetFrameMovement(transform.position.z, targetCellWorldPos.z));
             }
         }
-        else if (currentGridPos != targetGridPos) {
-            gridManager.GetGridSpaceAtCell(targetGridPos).SetOccupant(selectable);
-            currentGridPos = targetGridPos;
+        else if (CurrentGridPos != TargetGridPos) {
+            gridManager.GetGridSpaceAtCell(TargetGridPos).SetOccupant(selectable);
+            CurrentGridPos = TargetGridPos;
         }
         
     }
@@ -52,6 +50,16 @@ public class GridMover : MonoBehaviour
     }
 
     public void SetGridTarget(Vector2Int targetCell) {
-        this.targetGridPos = targetCell;
+        this.TargetGridPos = targetCell;
+    }
+
+    private void InitPosition() {
+        GridSpace closestSpace = gridManager.GetClosestGridSpaceToPos(transform.position);
+        TargetGridPos = closestSpace.CellCoords;
+        CurrentGridPos = closestSpace.CellCoords;
+
+        gridManager.GetGridSpaceAtCell(TargetGridPos).SetOccupant(selectable);
+
+        transform.position = gridManager.GetCellPos(CurrentGridPos, transform.position.y);
     }
 }

@@ -13,7 +13,7 @@ public class PlayerAttackIngester : MonoBehaviour, ISelectableIngester
     public GridMover gridMover;
 
     public void BeginListening() {
-        GridSelectionListener listener = new SelectableListenerBuilder(this).WithFilter(new RangeFilter(gridMover.currentGridPos, range, true))
+        GridSelectionListener listener = new SelectableListenerBuilder(this).WithFilter(new RangeFilter(gridMover.CurrentGridPos, range, true))
                                                                             .WithFilter(new OccupantFilter<EnemySelectable>())
                                                                             .WithNumTargets(numTargets)
                                                                             .WithExactSelection(false)

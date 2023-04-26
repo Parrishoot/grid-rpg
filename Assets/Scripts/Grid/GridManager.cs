@@ -6,20 +6,17 @@ public class GridManager : Singleton<GridManager>
 {
     public Grid grid;
 
-    public Vector2Int gridSize = new Vector2Int(8, 8);
+    public Vector2Int gridSize = new Vector2Int(0, 0);
 
     public GameObject gridSpacePrefab;
 
     public Transform gridSpaceParent;
 
-    private GridSpace[,] gridSpaces;
+    [field: SerializeField]
+    public SerializableMatrix<bool> EnabledGridSpaceMatrix { get; set; }
 
-    public override void Awake() {
-
-        base.Awake();
-
-        InitGrid();
-    }
+    [SerializeField]
+    private SerializableMatrix<GridSpace> gridSpaces;
 
     public Vector3 GetClosestCellPosToMouse() {
         Vector3 pos = MouseUtil.GetMousePosOnObject(transform.position);
@@ -66,15 +63,22 @@ public class GridManager : Singleton<GridManager>
         return grid.cellSize.x;
     }
 
-    private void InitGrid() {
-        gridSpaces = new GridSpace[gridSize.x, gridSize.y];
+    public void InitGrid() {
 
-        for(int x = 0; x < gridSize.x; x++) {
-            for(int y = 0; y < gridSize.y; y++) {
-                GridSpace gridSpace = Instantiate(gridSpacePrefab, GetCellPos(new Vector2Int(x, y)), Quaternion.identity).GetComponent<GridSpace>();
-                gridSpace.transform.SetParent(gridSpaceParent, true);
-                gridSpace.CellCoords = new Vector2Int(x, y);
-                gridSpaces[x, y] = gridSpace.GetComponent<GridSpace>();
+        foreach(GridSpace gridSpace in FindObjectsOfType<GridSpace>()) {
+            DestroyImmediate(gridSpace.gameObject);
+        }
+
+        gridSpaces = new SerializableMatrix<GridSpace>(gridSize.x, gridSize.y);
+
+        for(int y = gridSize.y - 1; y >= 0; y--) {
+            for(int x = 0; x < gridSize.x; x++) {
+                if(EnabledGridSpaceMatrix[x,y]) {
+                    GridSpace gridSpace = Instantiate(gridSpacePrefab, GetCellPos(new Vector2Int(x, y)), Quaternion.identity).GetComponent<GridSpace>();
+                    gridSpace.transform.SetParent(gridSpaceParent, true);
+                    gridSpace.CellCoords = new Vector2Int(x, y);
+                    gridSpaces[x, y] = gridSpace.GetComponent<GridSpace>();
+                }
             }
         }
     }
