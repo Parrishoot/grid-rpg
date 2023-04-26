@@ -55,7 +55,7 @@ public class GridSelectionListener {
     }
 
     public virtual void Select(GridSpaceSelectable gridSpace) {
-        if(!SelectionFinished()) {
+        if(selections.Count != numTargets) {
             selections.Push(gridSpace);
             gridSpace.Select();
         }

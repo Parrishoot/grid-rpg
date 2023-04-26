@@ -42,12 +42,17 @@ public class GridSpace: MonoBehaviour
         return occupantsParentTransform;
     }
 
-    public int GetDistance(GridSpace other) {
-        return Mathf.Abs(CellCoords.x - other.CellCoords.x) + Mathf.Abs(CellCoords.y - other.CellCoords.y); 
+    public int GetDistance(GridSpace other, bool countDiagonals = false) {
+        return GetDistance(other.CellCoords, countDiagonals); 
     }
 
-    public int GetDistance(Vector2Int cell) {
-        return Mathf.Abs(CellCoords.x - cell.x) + Mathf.Abs(CellCoords.y - cell.y); 
+    public int GetDistance(Vector2Int cell, bool countDiagonals = false) {
+        if(!countDiagonals) {
+            return Mathf.Abs(CellCoords.x - cell.x) + Mathf.Abs(CellCoords.y - cell.y);
+        }
+        else {
+            return Mathf.Max(Mathf.Abs(CellCoords.x - cell.x), Mathf.Abs(CellCoords.y - cell.y));
+        } 
     }
 
     public void ReevaluateSpace() {

@@ -62,6 +62,10 @@ public class GridManager : Singleton<GridManager>
         return GetGridSpaceAtCell(cell);
     }
 
+    public float GetCellSize() {
+        return grid.cellSize.x;
+    }
+
     private void InitGrid() {
         gridSpaces = new GridSpace[gridSize.x, gridSize.y];
 

@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cb4a45a99deb548944379ad006721f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  range: 3
   damage: 5
   gridMover: {fileID: 7056953616391274551}
 --- !u!1 &4162818920300111780
@@ -824,8 +824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02dde8456439e0945a9c84cb402bf00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiTweener: {fileID: 186382905979270707}
   healthController: {fileID: 307571205293208255}
+  uiTweener: {fileID: 186382905979270707}
 --- !u!114 &916195012155863160
 MonoBehaviour:
   m_ObjectHideFlags: 0
