@@ -10,7 +10,6 @@ public class GridSpaceSelectable : Selectable
     public override void Start()
     {
         this.selectionManager = SelectionManager.GetInstance();
-        Space = GetComponent<GridSpace>();
         StateController = GetComponentInChildren<ISelectableStateController>();
         GridSpaceStateController = (GridSpaceStateController) StateController;
 

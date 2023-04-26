@@ -41,6 +41,13 @@ public class GridSelectionListener {
 
     public void ProcessSelections() {
         ingester.ProcessSelections(selections.ToList());
+        DeselectSelections();
+    }
+
+    protected void DeselectSelections() {
+        while(selections.Count > 0) {
+            selections.Pop().Deselect();
+        }
     }
 
     public virtual void BeginListening() {
@@ -72,18 +79,22 @@ public class GridSelectionListener {
         }
     }
 
+    public virtual void ResetSelectableStatus(GridSpaceSelectable gridSpaceSelectable) {
+        gridSpaceSelectable.SetSelectable(PassesFilters(gridSpaceSelectable));
+    }
+
     protected virtual void SetEnabledSelectables() {
-        foreach(Selectable selectable in SelectionManager.GetInstance().GetSelectables()) {
-            selectable.SetSelectable(PassesFilters(selectable));
+        foreach(GridSpaceSelectable gridSpaceSelectable in SelectionManager.GetInstance().GetSelectables()) {
+            ResetSelectableStatus(gridSpaceSelectable);
         } 
     }
 
-    private bool PassesFilters(Selectable selectable) {
+    private bool PassesFilters(GridSpaceSelectable gridSpaceSelectable) {
         
         bool pass = true;
         
         foreach(ISelectableFilter filter in filters) {
-            pass = pass && filter.Filter(selectable);
+            pass = pass && filter.Filter(gridSpaceSelectable);
             if(!pass) {
                 return false;
             }

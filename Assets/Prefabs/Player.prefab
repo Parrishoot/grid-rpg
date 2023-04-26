@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1906d0f239a03c14ba520f426f562268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetGridPos: {x: 3, y: 4}
+  targetGridPos: {x: 0, y: 0}
   currentGridPos: {x: 0, y: 0}
   movementSpeed: 15
 --- !u!114 &8660071426970411777

@@ -11,17 +11,18 @@ public class GridMover : MonoBehaviour
     public float movementSpeed = 10f;
 
     private GridManager gridManager;
+
     private Selectable selectable;
 
     public void Start() {
         gridManager = GridManager.GetInstance();
         selectable = GetComponent<Selectable>();
         transform.position = gridManager.GetCellPos(currentGridPos, transform.position.y);
+        targetGridPos = currentGridPos;
+        gridManager.GetGridSpaceAtCell(targetGridPos).SetOccupant(selectable);
     }
 
     public void Update() {
-
-        currentGridPos = gridManager.GetClosestCellToPos(transform.position);
 
         if(!gridManager.IsAtCellCenter(transform.position, targetGridPos)) {
 
@@ -34,7 +35,7 @@ public class GridMover : MonoBehaviour
                 transform.Translate(0, 0, GetFrameMovement(transform.position.z, targetCellWorldPos.z));
             }
         }
-        else {
+        else if (currentGridPos != targetGridPos) {
             gridManager.GetGridSpaceAtCell(targetGridPos).SetOccupant(selectable);
         }
         

@@ -6,6 +6,11 @@ public class PlayerSelectable : FocusSelectable
 {
     public UITweener uiTweener;
 
+    public override void Start() {
+        this.selectionManager = SelectionManager.GetInstance();
+        StateController = GetComponent<ISelectableStateController>();
+    }
+
     public override void Select()
     {
         base.Select();

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISelectableFilter
 {
-    bool Filter(Selectable selectable);
+    bool Filter(GridSpaceSelectable gridSpace);
 }

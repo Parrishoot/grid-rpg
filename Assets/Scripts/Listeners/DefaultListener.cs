@@ -10,12 +10,10 @@ public class DefaultListener : GridSelectionListener
         
     }
 
-    protected override void SetEnabledSelectables()
+    public override void BeginListening()
     {
-        foreach(Selectable selectable in SelectionManager.GetInstance().GetSelectables()) {
-            selectable.SetSelectable(true);
-            selectable.StateController.SetIdle();
-        }
+        DeselectSelections();
+        base.BeginListening();
     }
 
     public override void Select(GridSpaceSelectable gridSpace) {
@@ -36,6 +34,14 @@ public class DefaultListener : GridSelectionListener
         selectable.StateController.SetIdle();
 
         return selectable;
+    }
+
+    public override void ResetSelectableStatus(GridSpaceSelectable gridSpaceSelectable)
+    {
+        base.ResetSelectableStatus(gridSpaceSelectable);
+        // if(!gridSpaceSelectable.Selected) {
+        //     gridSpaceSelectable.StateController.SetIdle();
+        // }
     }
 
     public override bool SelectionFinished() {

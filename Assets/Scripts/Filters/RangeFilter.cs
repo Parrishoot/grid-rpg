@@ -13,9 +13,9 @@ public class RangeFilter : ISelectableFilter
         this.range = range;
     }
 
-    public bool Filter(Selectable selectable)
+    public bool Filter(GridSpaceSelectable gridSpace)
     {
-        int distance = selectable.Space.GetDistance(origin);
+        int distance = gridSpace.Space.GetDistance(origin);
         return distance != 0 && distance <= range;
     }
 }

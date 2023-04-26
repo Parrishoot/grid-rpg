@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe458dcdfd66774e866b8bbcc6d832c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridSpaceSelectable: {fileID: 6538409790538720022}
   occupantsParentTransform: {fileID: 8764452990163704469}
 --- !u!114 &6538409790538720022
 MonoBehaviour:

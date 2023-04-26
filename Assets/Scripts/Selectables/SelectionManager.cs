@@ -8,7 +8,7 @@ public class SelectionManager : Singleton<SelectionManager>
 
     public Button confirmButton;
 
-    private GridSelectionListener Listener { get; set; }
+    public GridSelectionListener Listener { get; set; }
 
     private CameraController cameraController;
 
@@ -17,6 +17,7 @@ public class SelectionManager : Singleton<SelectionManager>
     void Start() {
         cameraController = CameraController.GetInstance();
         defaultListener = new SelectableListenerBuilder(null).WithFilter(new RangeFilter(new Vector2Int(0, 0), int.MaxValue))
+                                                             .WithFilter(new OccupantFilter<PlayerSelectable>())
                                                              .BuildDefault();
     }
     
@@ -32,9 +33,7 @@ public class SelectionManager : Singleton<SelectionManager>
     }
 
     public void ProcessListenerSelections() {
-
         Listener.ProcessSelections();
-
         SetupDefaultListener();
     }
 
@@ -80,8 +79,8 @@ public class SelectionManager : Singleton<SelectionManager>
         AssignListener(defaultListener);
     }
 
-    public Selectable[] GetSelectables() {
-        return FindObjectsOfType<Selectable>();
+    public GridSpaceSelectable[] GetSelectables() {
+        return FindObjectsOfType<GridSpaceSelectable>();
     }
 
     public bool DefaultListenerActive() {

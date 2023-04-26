@@ -17,5 +17,6 @@ public class PlayerWalkSelectableIngester : MonoBehaviour, ISelectableIngester
     public void ProcessSelections(List<GridSpaceSelectable> selections)
     {
         gridMover.SetGridTarget(selections[0].Space.CellCoords);
+        SelectionManager.GetInstance().EndListening();
     }
 }
