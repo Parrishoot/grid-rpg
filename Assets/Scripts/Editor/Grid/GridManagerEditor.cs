@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
+
 
 [CustomEditor(typeof(GridManager))]
 public class GridManagerEditor : Editor {
@@ -43,6 +45,12 @@ public class GridManagerEditor : Editor {
 
         if(GUILayout.Button("Generate Grid")) {
             gridManager.InitGrid();
+        }
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(gridManager);
+            // EditorSceneManager.MarkSceneDirty(gridManager.gameObject.scene);
         }
     }
 
