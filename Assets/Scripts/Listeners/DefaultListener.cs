@@ -31,7 +31,10 @@ public class DefaultListener : GridSelectionListener
     public override GridSpaceSelectable Deselect()
     {
         GridSpaceSelectable selectable = base.Deselect();
-        selectable.StateController.SetIdle();
+
+        if(selectable != null) {
+            selectable.StateController.SetIdle();
+        }
 
         return selectable;
     }
@@ -39,9 +42,9 @@ public class DefaultListener : GridSelectionListener
     public override void ResetSelectableStatus(GridSpaceSelectable gridSpaceSelectable)
     {
         base.ResetSelectableStatus(gridSpaceSelectable);
-        // if(!gridSpaceSelectable.Selected) {
-        //     gridSpaceSelectable.StateController.SetIdle();
-        // }
+        if(!gridSpaceSelectable.Selected) {
+            gridSpaceSelectable.StateController.SetIdle();
+        }
     }
 
     public override bool SelectionFinished() {

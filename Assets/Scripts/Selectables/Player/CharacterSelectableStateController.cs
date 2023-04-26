@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSelectableStateController : MonoBehaviour, ISelectableStateController
+public class CharacterSelectableStateController : MonoBehaviour, ISelectableStateController
 {
 
     public Material unselectedMaterial;

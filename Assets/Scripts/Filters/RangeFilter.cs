@@ -8,7 +8,7 @@ public class RangeFilter : ISelectableFilter
 
     private int range;
 
-    public RangeFilter(Vector2Int origin, int range) {
+    public RangeFilter(Vector2Int origin, int range, bool countDiagonals = false) {
         this.origin = origin;
         this.range = range;
     }

@@ -37,6 +37,7 @@ public class GridMover : MonoBehaviour
         }
         else if (currentGridPos != targetGridPos) {
             gridManager.GetGridSpaceAtCell(targetGridPos).SetOccupant(selectable);
+            currentGridPos = targetGridPos;
         }
         
     }
