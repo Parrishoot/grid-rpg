@@ -9,6 +9,9 @@ public class CharacterSelectableStateController : MonoBehaviour, ISelectableStat
 
     public Material selectedMaterial;
 
+    [SerializeField]
+    private UIController statsUIController;
+
     private MeshRenderer meshRenderer;
 
     public void Start() {
@@ -24,10 +27,12 @@ public class CharacterSelectableStateController : MonoBehaviour, ISelectableStat
     public void SetIdle()
     {
         meshRenderer.material = unselectedMaterial;
+        statsUIController.Close();
     }
 
     public void SetSelected()
     {
         meshRenderer.material = selectedMaterial;
+        statsUIController.Open();
     }
 }

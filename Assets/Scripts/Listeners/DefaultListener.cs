@@ -21,7 +21,7 @@ public class DefaultListener : GridSelectionListener
         if(!(selections.Count == 0)) {
             GridSpaceSelectable existingSpace = selections.Pop();
             existingSpace.Deselect();
-            existingSpace.StateController.SetIdle();
+            existingSpace.SetStateControllersIdle();
         }
 
         gridSpace.Select();
@@ -33,7 +33,7 @@ public class DefaultListener : GridSelectionListener
         GridSpaceSelectable selectable = base.Deselect();
 
         if(selectable != null) {
-            selectable.StateController.SetIdle();
+            selectable.SetStateControllersIdle();
         }
 
         return selectable;
@@ -43,7 +43,7 @@ public class DefaultListener : GridSelectionListener
     {
         base.ResetSelectableStatus(gridSpaceSelectable);
         if(!gridSpaceSelectable.Selected) {
-            gridSpaceSelectable.StateController.SetIdle();
+            gridSpaceSelectable.SetStateControllersIdle();
         }
     }
 

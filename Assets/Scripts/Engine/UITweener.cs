@@ -8,15 +8,24 @@ public class UITweener : MonoBehaviour
 
     public float tweenTime = .25f;
 
+    public float offScreenPositionX;
+
+    public float onScreenPositionX;
+
+    private RectTransform rectTransform;
+
     public void Start() {
-        transform.localScale = new Vector3(1, 0, 1);
+        rectTransform = transform.GetComponent<RectTransform>();
+        onScreenPositionX = rectTransform.anchoredPosition.x;
+        offScreenPositionX = -(rectTransform.rect.width + onScreenPositionX);
+        rectTransform.anchoredPosition = new Vector3(offScreenPositionX, rectTransform.localPosition.y, rectTransform.localPosition.z);
     } 
 
     public void Open() {
-        transform.DOScale(Vector3.one, tweenTime).SetEase(Ease.InOutCubic);
+        rectTransform.DOAnchorPosX(onScreenPositionX, tweenTime).SetEase(Ease.InOutCubic);
     }
 
     public void Close() {
-        transform.DOScale(Vector3.zero, tweenTime).SetEase(Ease.InOutCubic);
+        rectTransform.DOAnchorPosX(offScreenPositionX, tweenTime).SetEase(Ease.InOutCubic);
     }
 }

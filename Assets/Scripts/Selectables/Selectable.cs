@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity;
 using UnityEngine;
 
@@ -11,7 +13,7 @@ public class Selectable : MonoBehaviour {
 
     public GridSpace Space { get; set; }
 
-    public ISelectableStateController StateController { get; set; }
+    public List<ISelectableStateController> StateControllers { get; set; }
 
     protected virtual void Update() {
         Hovering = false;
@@ -19,7 +21,10 @@ public class Selectable : MonoBehaviour {
 
     public virtual void Select() {
         Selected = true;
-        StateController.SetSelected();
+
+        foreach(ISelectableStateController stateController in StateControllers) {
+            stateController.SetSelected();
+        }
     }
 
     public virtual void Deselect() {
@@ -28,13 +33,16 @@ public class Selectable : MonoBehaviour {
 
     protected virtual void Reset() {
         Selected = false;
-        StateController.SetIdle();
+        
+        foreach(ISelectableStateController stateController in StateControllers) {
+            stateController.SetIdle();
+        }
     }
 
     public virtual void Start() {
         this.selectionManager = SelectionManager.GetInstance();
         Space = GridManager.GetInstance().GetClosestGridSpaceToPos(transform.position);
-        StateController = GetComponent<ISelectableStateController>();
+        StateControllers = new List<ISelectableStateController>(GetComponents<ISelectableStateController>());
         Space.SetOccupant(this);
     }
 
@@ -45,17 +53,24 @@ public class Selectable : MonoBehaviour {
     protected virtual void OnMouseEnter() {
         if(!MouseUtil.IsMouseOverUI()) {
             Hovering = true;
-            StateController.SetHover();
+
+            foreach(ISelectableStateController stateController in StateControllers) {
+                stateController.SetHover();
+            }
         }
     }
 
     protected virtual void OnMouseExit() {
         
         if(!Selected) {
-            StateController.SetIdle();
+            foreach(ISelectableStateController stateController in StateControllers) {
+                stateController.SetIdle();
+            }
         }
         else {
-            StateController.SetSelected();
+            foreach(ISelectableStateController stateController in StateControllers) {
+                stateController.SetSelected();
+            }
         }
 
         Hovering = false;
@@ -67,7 +82,32 @@ public class Selectable : MonoBehaviour {
 
         if(!enabled) {
             Selected = false;
-            StateController.SetIdle();
+
+            SetStateControllersIdle();
+        }
+    }
+
+    public void SetStateControllersIdle() {
+        foreach(ISelectableStateController stateController in StateControllers) {
+            stateController.SetIdle();
+        }
+    }
+
+    public void SetStateControllersHover() {
+        foreach(ISelectableStateController stateController in StateControllers) {
+            stateController.SetHover();
+        }
+    }
+
+    public void SetStateControllersSelected() {
+        foreach(ISelectableStateController stateController in StateControllers) {
+            stateController.SetSelected();
+        }
+    }
+
+    protected void SetStateControllersHoverSelected() {
+        foreach(ISelectableStateController stateController in StateControllers) {
+            stateController.SetSelected();
         }
     }
 }

@@ -16,6 +16,8 @@ public class CameraController : Singleton<CameraController>
 
     public float snapToObjectSpeed = .1f;
 
+    public float translateSpeed = 10f;
+
     private Vector2 prevMousePos;
 
     // Start is called before the first frame update
@@ -40,6 +42,11 @@ public class CameraController : Singleton<CameraController>
         cameraObject.transform.localPosition = new Vector3(cameraObject.transform.localPosition.x, clampedY, clampedZ);
 
         prevMousePos = currentMousePos;
+
+        float verticalTranslation = Input.GetAxis("Vertical") * translateSpeed * Time.deltaTime;
+        float horizontalTranslation = Input.GetAxis("Horizontal") * translateSpeed * Time.deltaTime;
+
+        transform.Translate(new Vector3(horizontalTranslation, 0, verticalTranslation));
     }
 
     public void SetTarget(GameObject targetObject) {

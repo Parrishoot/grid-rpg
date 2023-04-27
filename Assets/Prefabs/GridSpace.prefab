@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe458dcdfd66774e866b8bbcc6d832c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CellCoords>k__BackingField: {x: 0, y: 0}
   gridSpaceSelectable: {fileID: 6538409790538720022}
   occupantsParentTransform: {fileID: 8764452990163704469}
 --- !u!114 &6538409790538720022
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239f350638002fc418681815604d4380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <GridSelectableStateController>k__BackingField: {fileID: 1444453566255191090}
 --- !u!1 &7487080848060354698
 GameObject:
   m_ObjectHideFlags: 0

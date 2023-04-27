@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 [CustomEditor(typeof(GridManager))]
 public class GridManagerEditor : Editor {
 
-    private float vertPadding = 5f;
-
     public override void OnInspectorGUI() {
+        
         base.OnInspectorGUI();
         
         EditorGUILayout.Space(15);
@@ -25,15 +24,16 @@ public class GridManagerEditor : Editor {
 
         EditorGUILayout.Space(15);
 
-        for (int i = 0, x = 0; x < gridManager.EnabledGridSpaceMatrix.Width; x++)
-        {
+        for (int i = 0, y = 0; y < gridManager.EnabledGridSpaceMatrix.Height; y++) {
             GUILayout.EndVertical();
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            for (int y = 0; y < gridManager.EnabledGridSpaceMatrix.Height; y++)
-            {
-                gridManager.EnabledGridSpaceMatrix[x, y] = EditorGUILayout.Toggle(gridManager.EnabledGridSpaceMatrix[x,y], GUILayout.Height(15), GUILayout.Width(15));
+
+            for (int x = 0; x < gridManager.EnabledGridSpaceMatrix.Width; x++) {
+                gridManager.EnabledGridSpaceMatrix[x, gridManager.EnabledGridSpaceMatrix.Height - y - 1] = EditorGUILayout.Toggle(gridManager.EnabledGridSpaceMatrix[x, gridManager.EnabledGridSpaceMatrix.Height - y - 1], 
+                                                                                                                           GUILayout.Height(15), GUILayout.Width(15));
             }
+            
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.BeginVertical();
@@ -50,7 +50,6 @@ public class GridManagerEditor : Editor {
         if (GUI.changed)
         {
             EditorUtility.SetDirty(gridManager);
-            // EditorSceneManager.MarkSceneDirty(gridManager.gameObject.scene);
         }
     }
 
@@ -59,7 +58,6 @@ public class GridManagerEditor : Editor {
         GridManager gridManager = (GridManager) target;
 
         SerializableMatrix<bool> prevGridMatrix = gridManager.EnabledGridSpaceMatrix.Clone();
-
         gridManager.EnabledGridSpaceMatrix = new SerializableMatrix<bool>(gridManager.gridSize.x, gridManager.gridSize.y, true);
 
         for(int x = 0; x < Mathf.Min(prevGridMatrix.Width, gridManager.EnabledGridSpaceMatrix.Width); x++) {

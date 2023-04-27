@@ -5,14 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(GridSpace))]
 public class GridSpaceSelectable : Selectable
 {
-    GridSpaceStateController GridSpaceStateController { get; set; }
+    [field: SerializeField]
+    GridSpaceStateController GridSelectableStateController { get; set; }
 
     public override void Start()
     {
         this.selectionManager = SelectionManager.GetInstance();
-        StateController = GetComponentInChildren<ISelectableStateController>();
-        GridSpaceStateController = (GridSpaceStateController) StateController;
-
+        StateControllers = new List<ISelectableStateController>();
+        StateControllers.Add(GridSelectableStateController);
     }
 
     public override void Select()
@@ -29,7 +29,7 @@ public class GridSpaceSelectable : Selectable
         base.Deselect();
 
         if(enabled) {
-            GridSpaceStateController.SetSelectable();
+            GridSelectableStateController.SetSelectable();
         }
 
         foreach(Selectable selectable in Space.GetOccupants()) {
@@ -42,7 +42,7 @@ public class GridSpaceSelectable : Selectable
         base.SetSelectable(selectable);
 
         if(enabled) {
-            GridSpaceStateController.SetSelectable();
+            GridSelectableStateController.SetSelectable();
         }
     }
 
@@ -51,7 +51,7 @@ public class GridSpaceSelectable : Selectable
         base.OnMouseExit();
 
         if(enabled && !Selected && !selectionManager.DefaultListenerActive()) {
-            GridSpaceStateController.SetSelectable();
+            GridSelectableStateController.SetSelectable();
         }
     }
 }

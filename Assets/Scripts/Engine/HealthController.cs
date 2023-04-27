@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    public int totalHealth;
+    [SerializeField]
+    private CharacterStats characterStats;
 
-    public int currentHealth;
+    public int CurrentHealth { get; set; }
 
     void Start() {
-        currentHealth = totalHealth;    
+        CurrentHealth = characterStats.Health;    
     }
 
     public void TakeDamage(int damage) {
-        this.currentHealth -= damage;
+        this.CurrentHealth -= damage;
+    }
+
+    public void Heal(int health) {
+        this.CurrentHealth = Mathf.Min(CurrentHealth + health, characterStats.Health);
     }
 }

@@ -71,7 +71,7 @@ public class GridManager : Singleton<GridManager>
 
         gridSpaces = new SerializableMatrix<GridSpace>(gridSize.x, gridSize.y);
 
-        for(int y = gridSize.y - 1; y >= 0; y--) {
+        for(int y = 0; y  < gridSize.y; y++) {
             for(int x = 0; x < gridSize.x; x++) {
                 if(EnabledGridSpaceMatrix[x,y]) {
                     GridSpace gridSpace = Instantiate(gridSpacePrefab, GetCellPos(new Vector2Int(x, y)), Quaternion.identity).GetComponent<GridSpace>();

@@ -14,8 +14,8 @@ public class CanvasBillboard : MonoBehaviour
 
     void Start()
     {
-        // canvas = GetComponent<Canvas>();
-        // canvas.worldCamera = Camera.main;
+        canvas = GetComponent<Canvas>();
+        canvas.worldCamera = Camera.main;
 
         camTransform = Camera.main.transform;
         originalRotation = transform.rotation;
