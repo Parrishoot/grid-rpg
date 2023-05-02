@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public enum StatType {
+        HEALTH,
+        SPEED,
+        STAMINA,
+        PROWESS,
+        POWER,
+        INTELLIGENCE
+    }
+
     // Self Explanatory
     [field: SerializeField]
     public int Health { get; set; }

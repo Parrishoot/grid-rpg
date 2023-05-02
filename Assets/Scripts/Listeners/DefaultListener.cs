@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DefaultListener : GridSelectionListener
 {
-    public DefaultListener(ISelectableIngester ingester, int numTargets, bool exact, List<ISelectableFilter> filters)
-     : base(ingester, numTargets, exact, filters)
+    public DefaultListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter)
+     : base(ingester, numTargets, exact, gridFilter)
     {
         
     }

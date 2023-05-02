@@ -11,7 +11,7 @@ public class SelectableListenerBuilder
 
     private bool exact = false;
 
-    private List<ISelectableFilter> filters = new List<ISelectableFilter>();
+    private GridFilter gridFilter = new GridFilter();
 
     public SelectableListenerBuilder(ISelectableIngester ingester) {
         this.ingester = ingester;
@@ -28,15 +28,20 @@ public class SelectableListenerBuilder
     }
 
     public SelectableListenerBuilder WithFilter(ISelectableFilter filter) {
-        filters.Add(filter);
+        gridFilter.AddFilter(filter);
+        return this;
+    }
+
+    public SelectableListenerBuilder WithFilter(GridFilter gridFilter) {
+        this.gridFilter = gridFilter;
         return this;
     }
 
     public GridSelectionListener Build() {
-        return new GridSelectionListener(ingester, numTargets, exact, filters);
+        return new GridSelectionListener(ingester, numTargets, exact, gridFilter);
     }
 
     public DefaultListener BuildDefault() {
-        return new DefaultListener(ingester, numTargets, exact, filters);
+        return new DefaultListener(ingester, numTargets, exact, gridFilter);
     }
 }

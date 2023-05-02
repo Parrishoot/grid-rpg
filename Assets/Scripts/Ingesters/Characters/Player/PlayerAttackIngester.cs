@@ -6,14 +6,14 @@ public class PlayerAttackIngester : MonoBehaviour, ISelectableIngester
 {
     public int range = 2;
 
-    public int damage = 5;
-
     public int numTargets = 2;
+
+    public CharacterStats stats;
 
     public GridMover gridMover;
 
     public void BeginListening() {
-        GridSelectionListener listener = new SelectableListenerBuilder(this).WithFilter(new RangeFilter(gridMover.CurrentGridPos, range, true))
+        GridSelectionListener listener = new SelectableListenerBuilder(this).WithFilter(new RangeFilter(gridMover.CurrentGridPos, range, false))
                                                                             .WithFilter(new OccupantFilter<EnemySelectable>())
                                                                             .WithNumTargets(numTargets)
                                                                             .WithExactSelection(false)
@@ -23,7 +23,7 @@ public class PlayerAttackIngester : MonoBehaviour, ISelectableIngester
 
     public void ProcessSelections(List<GridSpaceSelectable> selections)
     {
-        selections[0].Space.GetOccupantsParentTransform().GetComponentInChildren<EnemySelectable>().healthController.TakeDamage(damage);
+        selections[0].Space.GetOccupantsParentTransform().GetComponentInChildren<EnemySelectable>().healthController.TakeDamage(stats.Power);
         SelectionManager.GetInstance().EndListening();
     }
 }

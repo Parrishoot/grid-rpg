@@ -14,15 +14,15 @@ public class GridSelectionListener {
 
     private bool exact = false;
 
-    private List<ISelectableFilter> filters = new List<ISelectableFilter>();
+    private GridFilter gridFilter;
 
     public GridSelectionListener() { }
 
-    public GridSelectionListener(ISelectableIngester ingester, int numTargets, bool exact, List<ISelectableFilter> filters) {
+    public GridSelectionListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter) {
         this.ingester = ingester;
         this.numTargets = numTargets;
         this.exact = exact;
-        this.filters = filters;
+        this.gridFilter = gridFilter;
     }
 
     public virtual bool SelectionFinished() {
@@ -80,26 +80,12 @@ public class GridSelectionListener {
     }
 
     public virtual void ResetSelectableStatus(GridSpaceSelectable gridSpaceSelectable) {
-        gridSpaceSelectable.SetSelectable(PassesFilters(gridSpaceSelectable));
+        gridSpaceSelectable.SetSelectable(this.gridFilter.Evaluate(gridSpaceSelectable));
     }
 
     protected virtual void SetEnabledSelectables() {
         foreach(GridSpaceSelectable gridSpaceSelectable in SelectionManager.GetInstance().GetSelectables()) {
             ResetSelectableStatus(gridSpaceSelectable);
         } 
-    }
-
-    private bool PassesFilters(GridSpaceSelectable gridSpaceSelectable) {
-        
-        bool pass = true;
-        
-        foreach(ISelectableFilter filter in filters) {
-            pass = pass && filter.Filter(gridSpaceSelectable);
-            if(!pass) {
-                return false;
-            }
-        }
-        
-        return true;
     }
 }
