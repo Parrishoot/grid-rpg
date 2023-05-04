@@ -20,7 +20,6 @@ public class ActionController
     }
 
     public void Activate() {
-        GridSelectionListener listener = new SelectableListenerBuilder(Action.ability.GetIngester(characterManager)).WithFilter(Action.ability.GetFilter(characterManager)).Build();
-        SelectionManager.GetInstance().AssignListener(listener);
+        SelectionManager.GetInstance().AssignListener(Action.ability.GetListener(characterManager));
     }
 }

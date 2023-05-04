@@ -814,7 +814,8 @@ MonoBehaviour:
   availableActions:
   - {fileID: 11400000, guid: 948dc392b037f4c4a847206a94316aaf, type: 2}
   - {fileID: 11400000, guid: 347487924f9acb346a19ef56d8632770, type: 2}
-  - {fileID: 11400000, guid: 6d81b6a86a28b5644a07c3409f4def01, type: 2}
+  - {fileID: 11400000, guid: c15cff81e7c63964482a00ef38d09244, type: 2}
+  - {fileID: 11400000, guid: c85006e1e6b2f704592e12235751b084, type: 2}
   actionSetUIController: {fileID: 1259901865737496216}
   characterManager: {fileID: 6242779151375604820}
 --- !u!114 &6242779151375604820

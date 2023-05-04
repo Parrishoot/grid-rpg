@@ -12,7 +12,9 @@ public class CharacterAttackIngester : ISelectableIngester
 
     public void ProcessSelections(List<GridSpaceSelectable> selections)
     {
-        selections[0].Space.GetOccupantsParentTransform().GetComponentInChildren<EnemySelectable>().healthController.TakeDamage(this.power);
+        foreach(GridSpaceSelectable selection in selections) {
+            selection.Space.GetOccupantsParentTransform().GetComponentInChildren<EnemySelectable>().healthController.TakeDamage(this.power);
+        }
         SelectionManager.GetInstance().EndListening();
     }
 }
