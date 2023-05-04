@@ -6,6 +6,7 @@ public abstract class Ability : ScriptableObject
 {
     public abstract string GetDescription();
 
-    public abstract GridFilter GetGridFilter(Vector2Int origin);
+    public abstract GridFilter GetFilter(CharacterManager characterManager);
 
+    public abstract ISelectableIngester GetIngester(CharacterManager characterManager);
 }

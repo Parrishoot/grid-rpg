@@ -19,12 +19,17 @@ public class DamageAbility : Ability
         return string.Format("Damage {1} {2} For {3} Damage Up To {4} {5} Away", numTargets, enemyText, power, range, rangeText);
     }
 
-    public override GridFilter GetGridFilter(Vector2Int origin)
+    public override GridFilter GetFilter(CharacterManager characterManager)
     {
         GridFilter gridFilter = new GridFilter();
-        gridFilter.AddFilter(new RangeFilter(origin, range));
+        gridFilter.AddFilter(new RangeFilter(characterManager.CharacterGridMover.CurrentGridPos, range));
         gridFilter.AddFilter(new OccupantFilter<EnemySelectable>());
 
         return gridFilter;
+    }
+
+    public override ISelectableIngester GetIngester(CharacterManager characterManager)
+    {
+        return new CharacterAttackIngester(characterManager.CharacterStats.Power + power);
     }
 }
