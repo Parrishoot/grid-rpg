@@ -12,7 +12,7 @@ public class MultiTargetDamageAbility : DamageAbility
         string enemyText = numTargets >= 1 ? "Enemies" : "Enemy";
         string rangeText = range >= 1 ? "Spaces" : "Space";
 
-        return string.Format("Damage {1} {2} For {3} Damage Up To {4} {5} Away", numTargets, enemyText, power, range, rangeText);
+        return string.Format("Damage {0} {1} For {2} Damage Up To {3} {4} Away", numTargets, enemyText, power, range, rangeText);
     }
 
     public override GridSelectionListener GetListener(CharacterManager characterManager)

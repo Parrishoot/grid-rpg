@@ -13,7 +13,7 @@ public class DamageAbility : Ability
     {
         string rangeText = range >= 1 ? "Spaces" : "Space";
 
-        return string.Format("Damage An Enemy For {3} Damage Up To {4} {5} Away", power, range, rangeText);
+        return string.Format("Damage An Enemy For {0} Damage Up To {1} {2} Away", power, range, rangeText);
     }
 
     public override GridFilter GetFilter(CharacterManager characterManager)

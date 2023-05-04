@@ -8,7 +8,11 @@ public class ActionUIController : MonoBehaviour
 {
     public Button button;
 
-    public TMP_Text text;
+    public TMP_Text nameText;
+
+    public TMP_Text descriptionText;
+
+    public UIScaleTweener descriptionTweener;
 
     private UITweener parentPanelTweener;
 
@@ -22,6 +26,15 @@ public class ActionUIController : MonoBehaviour
             }
         );
 
-        text.SetText(actionController.Action.actionName);
+        nameText.SetText(actionController.Action.actionName);
+        descriptionText.SetText(actionController.Action.ability.GetDescription());
+    }
+
+    public void ShowDescription() {
+        descriptionTweener.Open();
+    }
+
+    public void HideDescription() {
+        descriptionTweener.Close();
     }
 }
