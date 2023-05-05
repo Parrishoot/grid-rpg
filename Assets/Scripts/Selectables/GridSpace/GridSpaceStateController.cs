@@ -19,7 +19,7 @@ public class GridSpaceStateController : MonoBehaviour, ISelectableStateControlle
 
     public void SetIdle() {
 
-        spriteRenderer.color = Color.black;
+        spriteRenderer.color = Color.white;
 
         KillActiveSequence();
     }

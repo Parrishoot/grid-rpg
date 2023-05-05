@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129f7b93f8962ee45b40a63bf18dcc09, type: 3}
   m_Name: BasicAttackAction
   m_EditorClassIdentifier: 
-  actionName: Basic Attack
+  actionName: Attack
   cost: 0
   ability: {fileID: 11400000, guid: 53aabb8f5d3ca084691dfd5ce22055aa, type: 2}
   augment: {fileID: 0}

@@ -823,7 +823,9 @@ GameObject:
   - component: {fileID: 5595481630357884427}
   - component: {fileID: 526727461144934066}
   - component: {fileID: 1240852770091461742}
+  - component: {fileID: 4130384561592982839}
   - component: {fileID: 1270374560214003477}
+  - component: {fileID: 1562026238164317669}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -986,6 +988,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthController: {fileID: 526727461144934066}
+--- !u!114 &4130384561592982839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076069619246597717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 003f1476f82a0bc4a81073aa665383bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CharacterGridMover>k__BackingField: {fileID: 6410588646524662294}
+  <CharacterStats>k__BackingField: {fileID: 1270374560214003477}
+  <HealthController>k__BackingField: {fileID: 526727461144934066}
+  <StaminaController>k__BackingField: {fileID: 1562026238164317669}
 --- !u!114 &1270374560214003477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,12 +1016,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21dabf1ac477c4f48a7a537e378d312e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Health>k__BackingField: 10
+  <Health>k__BackingField: 50
   <Speed>k__BackingField: 3
-  <Stamina>k__BackingField: 2
+  <Stamina>k__BackingField: 20
   <Prowess>k__BackingField: 5
   <Power>k__BackingField: 3
   <Intelligence>k__BackingField: 3
+--- !u!114 &1562026238164317669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076069619246597717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2655c21ef140d254fbaed189ebc2659c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterStats: {fileID: 1270374560214003477}
 --- !u!1 &3105700800430833533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,7 +1387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats: {fileID: 1270374560214003477}
-  healthController: {fileID: 526727461144934066}
+  characterManager: {fileID: 4130384561592982839}
   healthText: {fileID: 4127905828520282472}
   speedText: {fileID: 934734975479991503}
   staminaText: {fileID: 7097596367289891707}

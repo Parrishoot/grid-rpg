@@ -10,4 +10,10 @@ public class CharacterManager : MonoBehaviour
 
     [field: SerializeField]
     public CharacterStats CharacterStats { get; set; }
+
+    [field: SerializeField]
+    public HealthController HealthController { get; set; }
+
+    [field: SerializeField]
+    public StaminaController StaminaController { get; set; }
 }

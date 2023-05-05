@@ -17,7 +17,7 @@ public class WalkAbility : Ability
     public override GridFilter GetFilter(CharacterManager characterManager)
     {
         GridFilter gridFilter = new GridFilter();
-        gridFilter.AddFilter(new RangeFilter(characterManager.CharacterGridMover.CurrentGridPos, characterManager.CharacterStats.Stamina + range));
+        gridFilter.AddFilter(new WalkableRangeFilter(characterManager.CharacterGridMover.CurrentGridPos, range));
         gridFilter.AddFilter(new OccupantFilter<CharacterSelectable>(false));
 
         return gridFilter;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129f7b93f8962ee45b40a63bf18dcc09, type: 3}
   m_Name: BasicWalkAction
   m_EditorClassIdentifier: 
-  actionName: BasicWalk
+  actionName: Walk
   cost: 0
   ability: {fileID: 11400000, guid: 63c5b3c7a6fa05f499ecb233563a407e, type: 2}
   augment: {fileID: 0}

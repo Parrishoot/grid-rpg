@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ALongWalkAction
   m_EditorClassIdentifier: 
   actionName: A Long Walk
-  cost: 10
+  cost: 3
   ability: {fileID: 11400000, guid: 3f670ad8775a71249b4a121920585e86, type: 2}
   augment: {fileID: 0}

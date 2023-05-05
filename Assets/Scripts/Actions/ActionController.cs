@@ -20,6 +20,12 @@ public class ActionController
     }
 
     public void Activate() {
+        // TODO: MOVE THIS OUT OF HERE
+        characterManager.StaminaController.UseStamina(Action.cost);
         SelectionManager.GetInstance().AssignListener(Action.ability.GetListener(characterManager));
+    }
+
+    public bool ActionAvailable() {
+        return characterManager.StaminaController.StaminaAvailable(Action.cost);
     }
 }

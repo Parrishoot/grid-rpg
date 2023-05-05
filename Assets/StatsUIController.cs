@@ -7,7 +7,7 @@ public class StatsUIController : MonoBehaviour
 {
     public CharacterStats characterStats;
 
-    public HealthController healthController;
+    public CharacterManager characterManager;
 
     public TMP_Text healthText;
     public TMP_Text speedText;
@@ -17,9 +17,9 @@ public class StatsUIController : MonoBehaviour
     public TMP_Text intelligenceText;
 
     void Update() {
-        healthText.text = healthController.CurrentHealth.ToString() + " / " + characterStats.Health;
+        healthText.text = characterManager.HealthController.CurrentHealth.ToString() + " / " + characterStats.Health;
         speedText.text = characterStats.Speed.ToString();
-        staminaText.text = characterStats.Stamina.ToString();
+        staminaText.text = characterManager.StaminaController.CurrentStamina.ToString() + " / " + characterStats.Stamina;
         prowessText.text = characterStats.Prowess.ToString();
         powerText.text = characterStats.Power.ToString();
         intelligenceText.text = characterStats.Intelligence.ToString();

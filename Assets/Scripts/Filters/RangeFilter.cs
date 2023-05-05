@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class RangeFilter : ISelectableFilter
 {
-    private Vector2Int origin;
+    protected Vector2Int origin;
 
-    private int range;
+    protected int range;
 
     private bool countDiagonals;
 
@@ -16,19 +16,15 @@ public class RangeFilter : ISelectableFilter
         this.countDiagonals = countDiagonals;
     }
 
-    public bool Filter(GridSpaceSelectable gridSpace)
+    public virtual bool Filter(GridSpaceSelectable gridSpace)
     {
-        int distance = gridSpace.Space.GetDistance(origin, countDiagonals);
-        //return distance != 0 && distance <= range;
+        int distance = GetDistance(gridSpace);
+        return distance != 0 && distance <= range;
         
-        List<PathNode> path = null;
 
-        if(distance <= range) {
-            path = GridManager.GetInstance().FindPath(origin, gridSpace.Space.CellCoords, range);
-        }
+    }
 
-        gridSpace.SetPath(path);
-        
-        return path != null;
+    protected int GetDistance(GridSpaceSelectable gridSpace) {
+        return gridSpace.Space.GetDistance(origin, countDiagonals);
     }
 }

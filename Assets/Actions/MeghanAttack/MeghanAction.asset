@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129f7b93f8962ee45b40a63bf18dcc09, type: 3}
   m_Name: MeghanAction
   m_EditorClassIdentifier: 
-  actionName: Meghan Action
-  cost: 10
+  actionName: All Out War
+  cost: 20
   ability: {fileID: 11400000, guid: 077acbaf3701bf74b9bebce679942781, type: 2}
   augment: {fileID: 0}

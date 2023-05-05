@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a41e481f131ba40972a0f5c8b4d94d, type: 3}
   m_Name: BigAttackAbility
   m_EditorClassIdentifier: 
-  power: 10
-  range: 3
+  power: 2
+  range: 5
   numTargets: 2
