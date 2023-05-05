@@ -8,7 +8,7 @@ public class CanvasBillboard : MonoBehaviour
 
 	private Transform camTransform;
 
-    private float scaleCoefficient;
+    public float scaleCoefficient = 2f;
 
 	Quaternion originalRotation;
 
@@ -19,8 +19,6 @@ public class CanvasBillboard : MonoBehaviour
 
         camTransform = Camera.main.transform;
         originalRotation = transform.rotation;
-
-        scaleCoefficient = GetDistanceToCamera();
     }
 
     void Update()

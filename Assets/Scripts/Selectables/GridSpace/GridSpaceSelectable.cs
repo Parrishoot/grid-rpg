@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(GridSpace))]
 public class GridSpaceSelectable : Selectable
 {
     [field: SerializeField]
     GridSpaceStateController GridSelectableStateController { get; set; }
+
+    private List<Vector2Int> shortestPathToCurrentSelectable = null;
 
     public override void Start()
     {
@@ -53,5 +56,15 @@ public class GridSpaceSelectable : Selectable
         if(enabled && !Selected && !selectionManager.DefaultListenerActive()) {
             GridSelectableStateController.SetSelectable();
         }
+    }
+    
+    public void SetPath(List<PathNode> path) {
+        if(path != null) {
+            this.shortestPathToCurrentSelectable = path.Select(x => x.Origin).ToList();
+        }
+    }
+
+    public List<Vector2Int> GetPath() {
+        return this.shortestPathToCurrentSelectable;
     }
 }

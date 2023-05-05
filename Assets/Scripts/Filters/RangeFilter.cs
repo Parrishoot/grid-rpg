@@ -19,6 +19,16 @@ public class RangeFilter : ISelectableFilter
     public bool Filter(GridSpaceSelectable gridSpace)
     {
         int distance = gridSpace.Space.GetDistance(origin, countDiagonals);
-        return distance != 0 && distance <= range;
+        //return distance != 0 && distance <= range;
+        
+        List<PathNode> path = null;
+
+        if(distance <= range) {
+            path = GridManager.GetInstance().FindPath(origin, gridSpace.Space.CellCoords, range);
+        }
+
+        gridSpace.SetPath(path);
+        
+        return path != null;
     }
 }

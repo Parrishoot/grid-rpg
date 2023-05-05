@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a65e2f91c359ff408887ead1b5aee32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTime: 0.25
+  tweenTime: 0.1
   openScale: {x: 1, y: 1, z: 1}
   closedScale: {x: 0, y: 0, z: 0}
 --- !u!1 &6316147851757269105

@@ -17,10 +17,10 @@ public class UIScaleTweener : UIController
     } 
 
     public override void Open() {
-        transform.DOScale(openScale, tweenTime).SetEase(Ease.InOutCubic);
+        transform.DOScale(openScale, tweenTime).SetEase(Ease.InOutSine);
     }
 
     public override void Close() {
-        transform.DOScale(closedScale, tweenTime).SetEase(Ease.InOutCubic);
+        transform.DOScale(closedScale, tweenTime).SetEase(Ease.InOutSine);
     }
 }

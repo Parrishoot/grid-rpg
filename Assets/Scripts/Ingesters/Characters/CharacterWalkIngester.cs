@@ -15,7 +15,7 @@ public class CharacterWalkIngester : ISelectableIngester
 
     public void ProcessSelections(List<GridSpaceSelectable> selections)
     {
-        gridMover.SetGridTarget(selections[0].Space.CellCoords);
+        gridMover.SetPath(selections[0].GetPath());
         SelectionManager.GetInstance().EndListening();
     }
 }

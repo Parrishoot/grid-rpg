@@ -14,6 +14,8 @@ public class GridMover : MonoBehaviour
 
     private Selectable selectable;
 
+    private Queue<Vector2Int> path = new Queue<Vector2Int>();
+
     public void Start() {
         gridManager = GridManager.GetInstance();
         selectable = GetComponent<Selectable>();
@@ -21,7 +23,6 @@ public class GridMover : MonoBehaviour
     }
 
     public void Update() {
-
         if(!gridManager.IsAtCellCenter(transform.position, TargetGridPos)) {
 
             Vector3 targetCellWorldPos = gridManager.GetCellPos(TargetGridPos);
@@ -32,6 +33,9 @@ public class GridMover : MonoBehaviour
             else if(transform.position.z != targetCellWorldPos.z) {
                 transform.Translate(0, 0, GetFrameMovement(transform.position.z, targetCellWorldPos.z));
             }
+        }   
+        else if(path.Count != 0) {
+            TargetGridPos = path.Dequeue();
         }
         else if (CurrentGridPos != TargetGridPos) {
             gridManager.GetGridSpaceAtCell(TargetGridPos).SetOccupant(selectable);
@@ -49,8 +53,13 @@ public class GridMover : MonoBehaviour
         }
     }
 
+    public void SetPath(List<Vector2Int> path) {
+        this.path = new Queue<Vector2Int>(path);
+        TargetGridPos = this.path.Dequeue();
+    }
+
     public void SetGridTarget(Vector2Int targetCell) {
-        this.TargetGridPos = targetCell;
+        SetPath(new List<Vector2Int>() { targetCell } );
     }
 
     private void InitPosition() {

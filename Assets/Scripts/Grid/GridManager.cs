@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GridManager : Singleton<GridManager>
 {
@@ -17,6 +18,12 @@ public class GridManager : Singleton<GridManager>
 
     [SerializeField]
     private SerializableMatrix<GridSpace> gridSpaces;
+
+    private PathFinder pathFinder;
+
+    private void Start() {
+        pathFinder = new PathFinder(gridSpaces);    
+    }
 
     public Vector3 GetClosestCellPosToMouse() {
         Vector3 pos = MouseUtil.GetMousePosOnObject(transform.position);
@@ -63,6 +70,16 @@ public class GridManager : Singleton<GridManager>
         return grid.cellSize.x;
     }
 
+    public List<PathNode> FindPath(Vector2Int start, Vector2Int end, int maxDistance = -1) {
+        List<PathNode> path = pathFinder.FindPath(start, end);
+
+        if(path != null && maxDistance != -1 && path.Count > maxDistance) {
+            return null;
+        }
+
+        return path;
+    }
+
     public void InitGrid() {
 
         foreach(GridSpace gridSpace in FindObjectsOfType<GridSpace>()) {
@@ -73,12 +90,15 @@ public class GridManager : Singleton<GridManager>
 
         for(int y = 0; y  < gridSize.y; y++) {
             for(int x = 0; x < gridSize.x; x++) {
-                if(EnabledGridSpaceMatrix[x,y]) {
-                    GridSpace gridSpace = Instantiate(gridSpacePrefab, GetCellPos(new Vector2Int(x, y)), Quaternion.identity).GetComponent<GridSpace>();
-                    gridSpace.transform.SetParent(gridSpaceParent, true);
-                    gridSpace.CellCoords = new Vector2Int(x, y);
-                    gridSpaces[x, y] = gridSpace.GetComponent<GridSpace>();
+                GridSpace gridSpace = Instantiate(gridSpacePrefab, GetCellPos(new Vector2Int(x, y)), Quaternion.identity).GetComponent<GridSpace>();
+                gridSpace.transform.SetParent(gridSpaceParent, true);
+                gridSpace.CellCoords = new Vector2Int(x, y);
+
+                if(!EnabledGridSpaceMatrix[x,y]) {
+                    gridSpace.gridSpaceSelectable.gameObject.SetActive(false);
                 }
+
+                gridSpaces[x, y] = gridSpace.GetComponent<GridSpace>();
             }
         }
     }

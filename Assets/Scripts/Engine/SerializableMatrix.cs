@@ -38,11 +38,25 @@ using UnityEngine;
         set { values[y * width + x] = value; }
     }
 
+    public T this[int i]
+    {
+        get { return values[i]; }
+        set { values[i] = value; }
+    }
+
     public SerializableMatrix<T> Clone() {
 
         SerializableMatrix<T> newMatrix = new SerializableMatrix<T>(width, height);
         newMatrix.values = (T[]) values.Clone();
 
         return newMatrix;
+    }
+
+    public T[] GetValues() {
+        return values;
+    }
+
+    public void SetValues(T[] values) {
+        this.values = values;
     }
  }

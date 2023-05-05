@@ -59,4 +59,8 @@ public class GridSpace: MonoBehaviour
     public void ReevaluateSpace() {
         SelectionManager.GetInstance().Listener.ResetSelectableStatus(gridSpaceSelectable);
     }
+
+    public bool IsAccessible() {
+        return gridSpaceSelectable.gameObject.activeSelf && GetOccupants().Length == 0;
+    }
 }
