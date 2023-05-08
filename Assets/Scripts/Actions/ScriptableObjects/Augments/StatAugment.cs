@@ -8,7 +8,12 @@ public class StatAugment : Augment
 {
     public int adjustmentAmount;
 
-    public CharacterStats.StatType statType;
+    public StatType statType;
+
+    public override void Apply(CharacterManager characterManager)
+    {
+        Debug.Log("Augment!");
+    }
 
     public override string GetDescription()
     {

@@ -25,6 +25,10 @@ public class ActionController
         SelectionManager.GetInstance().AssignListener(Action.ability.GetListener(characterManager));
     }
 
+    public void SetAugment() {
+        Action.augment.Apply(characterManager);
+    }
+
     public bool ActionAvailable() {
         return characterManager.StaminaController.StaminaAvailable(Action.cost);
     }

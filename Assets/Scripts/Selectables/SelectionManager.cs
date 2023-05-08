@@ -18,13 +18,10 @@ public class SelectionManager : Singleton<SelectionManager>
         cameraController = CameraController.GetInstance();
         defaultListener = new SelectableListenerBuilder(null).WithFilter(new OccupantFilter<CharacterSelectable>())
                                                              .BuildDefault();
+        SetupDefaultListener();
     }
     
     void Update() {
-
-        if(Listener == null) {
-            SetupDefaultListener();
-        }
 
         CheckForMouseClickOnSelectable();
 
@@ -47,16 +44,18 @@ public class SelectionManager : Singleton<SelectionManager>
 
     private void CheckForMouseClickOnSelectable() {
         
+        if(MouseUtil.IsMouseOverUI()) {
+           return; 
+        }
+
         if(Input.GetMouseButtonDown(1)) {
             Listener.Deselect();
-            return;
         }
 
-        if(!Input.GetMouseButtonDown(0) || MouseUtil.IsMouseOverUI()) {
-            return;
+        else if(Input.GetMouseButtonDown(0)) {
+            CheckSelection(MouseUtil.GetSelectableAtMousePos());
         }
 
-        CheckSelection(MouseUtil.GetSelectableAtMousePos());
     }
     
     public void CheckSelection(GridSpaceSelectable gridSpace) {

@@ -18,7 +18,6 @@ public class WalkAbility : Ability
     {
         GridFilter gridFilter = new GridFilter();
         gridFilter.AddFilter(new WalkableRangeFilter(characterManager.CharacterGridMover.CurrentGridPos, range));
-        gridFilter.AddFilter(new OccupantFilter<CharacterSelectable>(false));
 
         return gridFilter;
     }

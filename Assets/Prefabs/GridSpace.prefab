@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239f350638002fc418681815604d4380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Space>k__BackingField: {fileID: 8443161714991512225}
   <GridSelectableStateController>k__BackingField: {fileID: 1444453566255191090}
 --- !u!1 &7487080848060354698
 GameObject:

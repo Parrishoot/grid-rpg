@@ -12,6 +12,7 @@ public class Selectable : MonoBehaviour {
 
     public bool Hovering { get; set; } = false;
 
+    [field: SerializeField]
     public GridSpace Space { get; set; }
 
     public List<ISelectableStateController> StateControllers { get; set; }
@@ -42,7 +43,11 @@ public class Selectable : MonoBehaviour {
 
     public virtual void Start() {
         this.selectionManager = SelectionManager.GetInstance();
-        Space = GridManager.GetInstance().GetClosestGridSpaceToPos(transform.position);
+
+        if(Space == null) {    
+            Space = GridManager.GetInstance().GetClosestGridSpaceToPos(transform.position);
+        }
+
         StateControllers = new List<ISelectableStateController>(GetComponents<ISelectableStateController>());
         Space.SetOccupant(this);
     }

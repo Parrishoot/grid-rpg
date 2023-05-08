@@ -15,4 +15,4 @@ MonoBehaviour:
   actionName: A Long Walk
   cost: 3
   ability: {fileID: 11400000, guid: 3f670ad8775a71249b4a121920585e86, type: 2}
-  augment: {fileID: 0}
+  augment: {fileID: 11400000, guid: c5ac2037e20f3b24dbfea1b972763468, type: 2}
