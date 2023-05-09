@@ -11,7 +11,7 @@ public class ActionController
 
     private CharacterManager characterManager;
 
-    private bool augmented = false;
+    public bool Augmented { get; set; } = false;
 
     public ActionController(Action action, CharacterManager characterManager) {
         this.Action = action;
@@ -21,12 +21,19 @@ public class ActionController
 
     public void Activate() {
         // TODO: MOVE THIS OUT OF HERE
-        characterManager.StaminaController.UseStamina(Action.cost);
+        characterManager.CharacterStats.GetStaminaController().Lose(Action.cost);
         SelectionManager.GetInstance().AssignListener(Action.ability.GetListener(characterManager));
     }
 
     public void SetAugment() {
-        Action.augment.Apply(characterManager);
+        if(!Augmented) {
+            Action.augment.Apply(characterManager);
+            Augmented = true;
+        }
+        else {
+            Action.augment.Remove(characterManager);
+            Augmented = false;
+        }
     }
 
     public bool ActionAvailable() {

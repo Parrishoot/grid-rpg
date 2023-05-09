@@ -20,6 +20,14 @@ public class ActionUIController : MonoBehaviour
 
     private ActionController actionController;
 
+    public Color baseColor;
+
+    public Color augmentedColor;
+
+    public void Start() {
+        this.baseColor = this.button.GetComponent<Image>().color;
+    }
+
     public void Init(ActionController actionController) {
 
         parentPanelTweener = GetComponentInParent<UITweener>();
@@ -32,7 +40,6 @@ public class ActionUIController : MonoBehaviour
 
         button.onRightClick.AddListener(delegate() {
                 actionController.SetAugment();
-                parentPanelTweener.Close();
             }
         );
 
@@ -44,7 +51,8 @@ public class ActionUIController : MonoBehaviour
     }
 
     public void Update() {
-        button.interactable = actionController.ActionAvailable();
+        button.interactable = actionController.ActionAvailable() && !actionController.Augmented;
+        button.GetComponent<Image>().color = actionController.Augmented ? augmentedColor : baseColor;
     }
 
     public void ShowDescription() {

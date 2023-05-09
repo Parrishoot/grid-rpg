@@ -4,25 +4,22 @@ using UnityEngine;
 using TMPro;
 
 public class StatsUIController : MonoBehaviour
+
 {
-    public CharacterStats characterStats;
+    public GameObject statUIPrefab;
 
-    public CharacterManager characterManager;
+    public List<StatType> statOrder = new List<StatType>() {
+        StatType.HEALTH,
+        StatType.SPEED,
+        StatType.STAMINA,
+        StatType.PROWESS,
+        StatType.POWER,
+        StatType.INTELLIGENCE
+    };
 
-    public TMP_Text healthText;
-    public TMP_Text speedText;
-    public TMP_Text staminaText;
-    public TMP_Text prowessText;
-    public TMP_Text powerText;
-    public TMP_Text intelligenceText;
-
-    void Update() {
-        healthText.text = characterManager.HealthController.CurrentHealth.ToString() + " / " + characterStats.Health;
-        speedText.text = characterStats.Speed.ToString();
-        staminaText.text = characterManager.StaminaController.CurrentStamina.ToString() + " / " + characterStats.Stamina;
-        prowessText.text = characterStats.Prowess.ToString();
-        powerText.text = characterStats.Power.ToString();
-        intelligenceText.text = characterStats.Intelligence.ToString();
+    public void Init(CharacterStats characterStats) {
+        foreach(StatType stat in statOrder) {
+            Instantiate(statUIPrefab, transform).GetComponent<StatUIController>().Init(characterStats.GetControllerForStat(stat));
+        }
     }
-
 }

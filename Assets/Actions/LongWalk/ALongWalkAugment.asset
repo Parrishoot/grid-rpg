@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f0e3ea5112d4e47ac8a8ee547bc5c8, type: 3}
   m_Name: ALongWalkAugment
   m_EditorClassIdentifier: 
-  adjustmentAmount: 2
-  statType: 0
+  adjustmentAmount: 4
+  statType: 1

@@ -327,6 +327,8 @@ MonoBehaviour:
   staminaCostText: {fileID: 5617119072298142076}
   descriptionText: {fileID: 5073323679760362103}
   descriptionTweener: {fileID: 6683452373700514311}
+  baseColor: {r: 0, g: 0, b: 0, a: 0}
+  augmentedColor: {r: 1, g: 0.5727849, b: 0, a: 1}
 --- !u!114 &8781346820552810783
 MonoBehaviour:
   m_ObjectHideFlags: 0

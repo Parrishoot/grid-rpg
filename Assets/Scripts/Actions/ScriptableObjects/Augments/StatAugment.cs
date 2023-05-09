@@ -12,7 +12,12 @@ public class StatAugment : Augment
 
     public override void Apply(CharacterManager characterManager)
     {
-        Debug.Log("Augment!");
+        characterManager.CharacterStats.GetControllerForStat(statType).AdjustAugment(adjustmentAmount);
+    }
+
+    public override void Remove(CharacterManager characterManager)
+    {
+        characterManager.CharacterStats.GetControllerForStat(statType).AdjustAugment(-adjustmentAmount);
     }
 
     public override string GetDescription()
