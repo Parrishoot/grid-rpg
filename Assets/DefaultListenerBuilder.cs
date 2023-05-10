@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultListenerBuilder : SelectableListenerBuilderBase<DefaultListener>
+public class DefaultListenerBuilder : UserGridSelectionListenerBuilderBase<DefaultListener>
 {
     public DefaultListenerBuilder() : base(null)
     {

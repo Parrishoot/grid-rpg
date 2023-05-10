@@ -19,4 +19,8 @@ public abstract class GridSpaceSelector
     public virtual void ProcessSelections(List<GridSpaceSelectable> selections) {
         ingester.ProcessSelections(selections);
     }
+
+    public virtual List<GridSpaceSelectable> GetSelectableSpaces() {
+        return SelectionManager.GetInstance().GetSelectables().ToList().FindAll(x => gridFilter.Evaluate(x));
+    }
 }

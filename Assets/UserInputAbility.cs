@@ -6,7 +6,7 @@ public abstract class UserInputAbility: SelectionAbility
 {
 
     protected override GridSpaceSelector GetSpaceSelector(CharacterManager characterManager) {
-        return new GridSelectionListenerBuilder(GetIngester(characterManager)).WithFilter(GetFilter(characterManager)).Build();
+        return new UserGridSelectionListenerBuilder(GetIngester(characterManager)).WithFilter(GetFilter(characterManager)).Build();
     }
 
     public override abstract string GetDescription();

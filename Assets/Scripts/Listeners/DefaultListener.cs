@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultListener : GridSelectionListener
+public class DefaultListener : UserGridSelectionListener
 {
     public DefaultListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter) : base(ingester, numTargets, exact, gridFilter)
     {
@@ -10,7 +10,7 @@ public class DefaultListener : GridSelectionListener
 
     public override void GatherSelections()
     {
-        DeselectSelections();
+        DeselectAll();
         base.GatherSelections();
     }
 
@@ -22,24 +22,25 @@ public class DefaultListener : GridSelectionListener
             existingSpace.SetStateControllersIdle();
         }
 
-        gridSpace.Select();
-        selections.Push(gridSpace);
+        base.Select(gridSpace);
     }
 
-    public override GridSpaceSelectable Deselect()
+    public override void Deselect()
     {
-        GridSpaceSelectable selectable = base.Deselect();
+
+        GridSpaceSelectable selectable = selections.Peek();
+
+        base.Deselect();
 
         if(selectable != null) {
             selectable.SetStateControllersIdle();
         }
-
-        return selectable;
     }
 
     public override void ResetSelectableStatus(GridSpaceSelectable gridSpaceSelectable)
     {
         base.ResetSelectableStatus(gridSpaceSelectable);
+        
         if(!gridSpaceSelectable.Selected) {
             gridSpaceSelectable.SetStateControllersIdle();
         }

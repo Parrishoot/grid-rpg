@@ -8,7 +8,7 @@ public class SelectionManager : Singleton<SelectionManager>
 
     public Button confirmButton;
 
-    public GridSelectionListener Listener { get; set; }
+    public UserConfirmGridSpaceSelector Listener { get; set; }
 
     private CameraController cameraController;
 
@@ -37,7 +37,7 @@ public class SelectionManager : Singleton<SelectionManager>
         SetupDefaultListener();
     }
 
-    public void AssignListener(GridSelectionListener selectableListener) {
+    public void AssignListener(UserConfirmGridSpaceSelector selectableListener) {
         Listener = selectableListener;
     }
 
