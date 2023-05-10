@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewDamageAbility", menuName = "ScriptableObjects/Abilities/Damage Ability", order = 1)]
-public class DamageAbility : Ability
+public class DamageAbility : UserInputAbility
 {
     public int power;
 
@@ -16,7 +16,7 @@ public class DamageAbility : Ability
         return string.Format("Damage An Enemy For {0} Damage Up To {1} {2} Away", power, range, rangeText);
     }
 
-    public override GridFilter GetFilter(CharacterManager characterManager)
+    protected override GridFilter GetFilter(CharacterManager characterManager)
     {
         GridFilter gridFilter = new GridFilter();
         gridFilter.AddFilter(new RangeFilter(characterManager.CharacterGridMover.CurrentGridPos, range));
@@ -25,7 +25,7 @@ public class DamageAbility : Ability
         return gridFilter;
     }
 
-    public override ISelectableIngester GetIngester(CharacterManager characterManager)
+    protected override ISelectableIngester GetIngester(CharacterManager characterManager)
     {
         return new CharacterAttackIngester(characterManager.CharacterStats.Power + power);
     }

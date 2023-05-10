@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: New Test!
   cost: 10
-  ability: {fileID: 11400000, guid: 1ae9656a5925d59418241980b8d8cd7d, type: 2}
-  augment: {fileID: 11400000, guid: 9a34a1c8be508fd4cb6607aec2de7ee7, type: 2}
+  active: {fileID: 11400000, guid: 1ae9656a5925d59418241980b8d8cd7d, type: 2}
+  passive: {fileID: 0}

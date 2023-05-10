@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Globalization;
 
 [CreateAssetMenu(fileName = "NewStatAugment", menuName = "ScriptableObjects/Augments/Stat Augment", order = 1)]
-public class StatAugment : Augment
+public class StatAdjustAbility : Ability
 {
     public int adjustmentAmount;
 

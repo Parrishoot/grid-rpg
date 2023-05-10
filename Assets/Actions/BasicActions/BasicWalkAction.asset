@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Walk
   cost: 0
-  ability: {fileID: 11400000, guid: 63c5b3c7a6fa05f499ecb233563a407e, type: 2}
-  augment: {fileID: 0}
+  active: {fileID: 11400000, guid: 63c5b3c7a6fa05f499ecb233563a407e, type: 2}
+  passive: {fileID: 0}

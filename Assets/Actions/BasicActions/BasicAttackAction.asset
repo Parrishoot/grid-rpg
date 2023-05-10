@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Attack
   cost: 0
-  ability: {fileID: 11400000, guid: 53aabb8f5d3ca084691dfd5ce22055aa, type: 2}
-  augment: {fileID: 0}
+  active: {fileID: 11400000, guid: 53aabb8f5d3ca084691dfd5ce22055aa, type: 2}
+  passive: {fileID: 0}

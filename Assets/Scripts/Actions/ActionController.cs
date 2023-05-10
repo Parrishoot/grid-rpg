@@ -22,16 +22,16 @@ public class ActionController
     public void Activate() {
         // TODO: MOVE THIS OUT OF HERE
         characterManager.CharacterStats.GetStaminaController().Lose(Action.cost);
-        SelectionManager.GetInstance().AssignListener(Action.ability.GetListener(characterManager));
+        Action.active.Apply(characterManager);
     }
 
     public void SetAugment() {
         if(!Augmented) {
-            Action.augment.Apply(characterManager);
+            Action.passive.Apply(characterManager);
             Augmented = true;
         }
         else {
-            Action.augment.Remove(characterManager);
+            Action.passive.Remove(characterManager);
             Augmented = false;
         }
     }

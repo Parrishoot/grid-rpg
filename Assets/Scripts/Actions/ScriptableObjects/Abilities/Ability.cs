@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public abstract class Ability : ScriptableObject
+[Serializable]
+public abstract class Ability: ScriptableObject
 {
     public abstract string GetDescription();
-
-    public abstract GridFilter GetFilter(CharacterManager characterManager);
-
-    public abstract ISelectableIngester GetIngester(CharacterManager characterManager);
-
-    public virtual GridSelectionListener GetListener(CharacterManager characterManager) {
-        return new GridSelectionListenerBuilder(GetIngester(characterManager)).WithFilter(GetFilter(characterManager)).Build();
-    }
+ 
+    public abstract void Apply(CharacterManager characterManager);
+ 
+    public abstract void Remove(CharacterManager characterManager);
 }

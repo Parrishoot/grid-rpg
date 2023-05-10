@@ -15,8 +15,7 @@ public class MultiTargetDamageAbility : DamageAbility
         return string.Format("Damage {0} {1} For {2} Damage Up To {3} {4} Away", numTargets, enemyText, power, range, rangeText);
     }
 
-    public override GridSelectionListener GetListener(CharacterManager characterManager)
-    {
+    protected override GridSpaceSelector GetSpaceSelector(CharacterManager characterManager) {
         return new GridSelectionListenerBuilder(GetIngester(characterManager)).WithFilter(GetFilter(characterManager))
                                                                               .WithNumTargets(numTargets)
                                                                               .Build();

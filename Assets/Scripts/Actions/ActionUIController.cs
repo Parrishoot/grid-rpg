@@ -45,7 +45,7 @@ public class ActionUIController : MonoBehaviour
 
         nameText.SetText(actionController.Action.actionName);
         staminaCostText.SetText(actionController.Action.cost.ToString());
-        descriptionText.SetText(actionController.Action.ability.GetDescription());
+        descriptionText.SetText(actionController.Action.active.GetDescription());
 
         this.actionController = actionController;
     }

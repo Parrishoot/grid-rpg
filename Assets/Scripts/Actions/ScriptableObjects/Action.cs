@@ -9,7 +9,7 @@ public class Action : ScriptableObject
 
     public int cost = 10;
 
-    public Ability ability;
+    public Ability active;
 
-    public Augment augment;
+    public Ability passive;
 }

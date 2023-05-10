@@ -39,7 +39,6 @@ public class SelectionManager : Singleton<SelectionManager>
 
     public void AssignListener(GridSelectionListener selectableListener) {
         Listener = selectableListener;
-        Listener.GatherSelections();
     }
 
     private void CheckForMouseClickOnSelectable() {
@@ -75,6 +74,7 @@ public class SelectionManager : Singleton<SelectionManager>
 
     private void SetupDefaultListener() {
         AssignListener(defaultListener);
+        defaultListener.GatherSelections();
     }
 
     public GridSpaceSelectable[] GetSelectables() {

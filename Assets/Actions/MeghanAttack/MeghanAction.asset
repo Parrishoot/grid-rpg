@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: All Out War
   cost: 20
-  ability: {fileID: 11400000, guid: 077acbaf3701bf74b9bebce679942781, type: 2}
-  augment: {fileID: 0}
+  active: {fileID: 11400000, guid: 077acbaf3701bf74b9bebce679942781, type: 2}
+  passive: {fileID: 0}

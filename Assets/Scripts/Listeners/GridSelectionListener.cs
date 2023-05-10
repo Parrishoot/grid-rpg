@@ -43,6 +43,7 @@ public class GridSelectionListener: GridSpaceSelector {
     }
 
     public override void GatherSelections() {
+        SelectionManager.GetInstance().AssignListener(this);
         SetEnabledSelectables();
     }
 
