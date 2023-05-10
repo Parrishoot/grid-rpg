@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectableListenerBuilder
+public class SelectableListenerBuilder<T>
+where T: GridSelectionListener, new()
 {
     private ISelectableIngester ingester;
 
@@ -17,31 +18,29 @@ public class SelectableListenerBuilder
         this.ingester = ingester;
     }
 
-    public SelectableListenerBuilder WithNumTargets(int numTargets) {
+    public SelectableListenerBuilder<T> WithNumTargets(int numTargets) {
         this.numTargets = numTargets;
         return this;
     }
 
-    public SelectableListenerBuilder WithExactSelection(bool exact) {
+    public SelectableListenerBuilder<T> WithExactSelection(bool exact) {
         this.exact = exact;
         return this;
     }
 
-    public SelectableListenerBuilder WithFilter(ISelectableFilter filter) {
+    public SelectableListenerBuilder<T> WithFilter(ISelectableFilter filter) {
         gridFilter.AddFilter(filter);
         return this;
     }
 
-    public SelectableListenerBuilder WithFilter(GridFilter gridFilter) {
+    public SelectableListenerBuilder<T> WithFilter(GridFilter gridFilter) {
         this.gridFilter = gridFilter;
         return this;
     }
 
-    public GridSelectionListener Build() {
-        return new GridSelectionListener(ingester, numTargets, exact, gridFilter);
-    }
-
-    public DefaultListener BuildDefault() {
-        return new DefaultListener(ingester, numTargets, exact, gridFilter);
+    public T Build() {
+        T listener = new T();
+        listener.Init(ingester, numTargets, exact, gridFilter);
+        return listener;
     }
 }

@@ -18,7 +18,7 @@ public class GridSelectionListener {
 
     public GridSelectionListener() { }
 
-    public GridSelectionListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter) {
+    public virtual void Init(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter) {
         this.ingester = ingester;
         this.numTargets = numTargets;
         this.exact = exact;

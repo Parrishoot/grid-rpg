@@ -15,7 +15,8 @@ public class Selectable : MonoBehaviour {
     [field: SerializeField]
     public GridSpace Space { get; set; }
 
-    public List<ISelectableStateController> StateControllers { get; set; }
+    [field: SerializeField]
+    public List<ISelectableStateController> StateControllers { get; set; } = new List<ISelectableStateController>();
 
     protected virtual void Update() {
         Hovering = false;

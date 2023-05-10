@@ -16,8 +16,8 @@ public class SelectionManager : Singleton<SelectionManager>
 
     void Start() {
         cameraController = CameraController.GetInstance();
-        defaultListener = new SelectableListenerBuilder(null).WithFilter(new OccupantFilter<CharacterSelectable>())
-                                                             .BuildDefault();
+        defaultListener = new SelectableListenerBuilder<DefaultListener>(null).WithFilter(new OccupantFilter<CharacterSelectable>())
+                                                                              .Build();
         SetupDefaultListener();
     }
     

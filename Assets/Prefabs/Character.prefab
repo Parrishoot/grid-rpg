@@ -229,7 +229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CharacterGridMover>k__BackingField: {fileID: 6410588646524662294}
   <CharacterStats>k__BackingField: {fileID: 1270374560214003477}
-  <HealthController>k__BackingField: {fileID: 526727461144934066}
   <StaminaController>k__BackingField: {fileID: 1562026238164317669}
 --- !u!114 &1270374560214003477
 MonoBehaviour:
@@ -396,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statUIPrefab: {fileID: 7295696123522611352, guid: 0f88faa826b37594db5aa84c844dc8bd, type: 3}
-  statOrder: 000000000100000002000000030000000400000005000000
+  statOrder: 000000000200000001000000030000000400000005000000
 --- !u!1 &6207550307016116999
 GameObject:
   m_ObjectHideFlags: 0

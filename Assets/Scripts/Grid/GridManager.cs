@@ -21,6 +21,11 @@ public class GridManager : Singleton<GridManager>
 
     private PathFinder pathFinder;
 
+    public override void Awake() {
+        base.Awake();
+        InitGrid();
+    }
+
     private void Start() {
         pathFinder = new PathFinder(gridSpaces);    
     }

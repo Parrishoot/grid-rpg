@@ -11,6 +11,6 @@ public abstract class Ability : ScriptableObject
     public abstract ISelectableIngester GetIngester(CharacterManager characterManager);
 
     public virtual GridSelectionListener GetListener(CharacterManager characterManager) {
-        return new SelectableListenerBuilder(GetIngester(characterManager)).WithFilter(GetFilter(characterManager)).Build();
+        return new SelectableListenerBuilder<GridSelectionListener>(GetIngester(characterManager)).WithFilter(GetFilter(characterManager)).Build();
     }
 }

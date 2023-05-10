@@ -17,6 +17,8 @@ public class MultiTargetDamageAbility : DamageAbility
 
     public override GridSelectionListener GetListener(CharacterManager characterManager)
     {
-        return new SelectableListenerBuilder(GetIngester(characterManager)).WithFilter(GetFilter(characterManager)).WithNumTargets(numTargets).Build();
+        return new SelectableListenerBuilder<GridSelectionListener>(GetIngester(characterManager)).WithFilter(GetFilter(characterManager))
+                                                                                                  .WithNumTargets(numTargets)
+                                                                                                  .Build();
     }
 }

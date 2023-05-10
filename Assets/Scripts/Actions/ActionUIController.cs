@@ -52,6 +52,7 @@ public class ActionUIController : MonoBehaviour
 
     public void Update() {
         button.interactable = actionController.ActionAvailable() && !actionController.Augmented;
+        Debug.Log(button.interactable);
         button.GetComponent<Image>().color = actionController.Augmented ? augmentedColor : baseColor;
     }
 
