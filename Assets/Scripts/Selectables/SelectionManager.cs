@@ -16,8 +16,8 @@ public class SelectionManager : Singleton<SelectionManager>
 
     void Start() {
         cameraController = CameraController.GetInstance();
-        defaultListener = new SelectableListenerBuilder<DefaultListener>(null).WithFilter(new OccupantFilter<CharacterSelectable>())
-                                                                              .Build();
+        defaultListener = new DefaultListenerBuilder().WithFilter(new OccupantFilter<CharacterSelectable>())
+                                                      .Build();
         SetupDefaultListener();
     }
     
@@ -39,7 +39,7 @@ public class SelectionManager : Singleton<SelectionManager>
 
     public void AssignListener(GridSelectionListener selectableListener) {
         Listener = selectableListener;
-        Listener.BeginListening();
+        Listener.GatherSelections();
     }
 
     private void CheckForMouseClickOnSelectable() {

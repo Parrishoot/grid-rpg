@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class DefaultListener : GridSelectionListener
 {
-    public override void BeginListening()
+    public DefaultListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter) : base(ingester, numTargets, exact, gridFilter)
+    {
+    }
+
+    public override void GatherSelections()
     {
         DeselectSelections();
-        base.BeginListening();
+        base.GatherSelections();
     }
 
     public override void Select(GridSpaceSelectable gridSpace) {

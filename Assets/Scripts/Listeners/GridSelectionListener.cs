@@ -4,25 +4,17 @@ using System;
 using UnityEngine;
 using System.Linq;
 
-public class GridSelectionListener {
+public class GridSelectionListener: GridSpaceSelector {
 
     protected Stack<GridSpaceSelectable> selections = new Stack<GridSpaceSelectable>();
-
-    private ISelectableIngester ingester;
 
     private int numTargets = 1;
 
     private bool exact = false;
 
-    private GridFilter gridFilter;
-
-    public GridSelectionListener() { }
-
-    public virtual void Init(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter) {
-        this.ingester = ingester;
+    public GridSelectionListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter): base(ingester, gridFilter) {
         this.numTargets = numTargets;
         this.exact = exact;
-        this.gridFilter = gridFilter;
     }
 
     public virtual bool SelectionFinished() {
@@ -40,7 +32,7 @@ public class GridSelectionListener {
     }
 
     public void ProcessSelections() {
-        ingester.ProcessSelections(selections.ToList());
+        base.ProcessSelections(selections.ToList());
         DeselectSelections();
     }
 
@@ -50,7 +42,7 @@ public class GridSelectionListener {
         }
     }
 
-    public virtual void BeginListening() {
+    public override void GatherSelections() {
         SetEnabledSelectables();
     }
 
