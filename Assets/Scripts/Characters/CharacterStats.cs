@@ -32,7 +32,7 @@ public class CharacterStats : MonoBehaviour
 
     public StatsUIController statsUIController;
 
-    void Start() {
+    void Awake() {
         statControllers = new Dictionary<StatType, StatController>();
         statControllers.Add(StatType.HEALTH, new AdjustableStatController(StatType.HEALTH, Health));
         statControllers.Add(StatType.SPEED, new StatController(StatType.SPEED, Speed));

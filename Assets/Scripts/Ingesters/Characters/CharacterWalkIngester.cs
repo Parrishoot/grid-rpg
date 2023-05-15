@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class CharacterWalkIngester : ISelectableIngester
 {
-    private GridMover gridMover;
+    protected GridMover gridMover;
 
-    private int range;
-
-    public CharacterWalkIngester(int range, GridMover gridMover) {
-        this.range = range;
+    public CharacterWalkIngester(GridMover gridMover) {
         this.gridMover = gridMover;
     }
 
     public void ProcessSelections(List<GridSpaceSelectable> selections)
     {
-        gridMover.SetPath(selections[0].GetPath());
-        SelectionManager.GetInstance().EndListening();
+        gridMover.SetPath(selections[0].GetPath(), OnDestinationReached);
+        SelectionManager.GetInstance().EndListening(true);
+    }
+
+    protected virtual void OnDestinationReached() {
+        
     }
 }

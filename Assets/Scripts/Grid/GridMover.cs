@@ -16,6 +16,9 @@ public class GridMover : MonoBehaviour
 
     private Queue<Vector2Int> path = new Queue<Vector2Int>();
 
+    public delegate void OnDestinationReached(); 
+    OnDestinationReached onDestinationReached;
+
     public void Start() {
         gridManager = GridManager.GetInstance();
         selectable = GetComponent<Selectable>();
@@ -38,6 +41,10 @@ public class GridMover : MonoBehaviour
             TargetGridPos = path.Dequeue();
         }
         else if (CurrentGridPos != TargetGridPos) {
+
+            onDestinationReached?.Invoke();
+            // onDestinationReached = null;
+
             gridManager.GetGridSpaceAtCell(TargetGridPos).SetOccupant(selectable);
             CurrentGridPos = TargetGridPos;
         }
@@ -53,12 +60,27 @@ public class GridMover : MonoBehaviour
         }
     }
 
-    public void SetPath(List<Vector2Int> path) {
+    public void AddOnDestinationReachedEvent(OnDestinationReached onDestinationReachedEvent) {
+        onDestinationReached += onDestinationReachedEvent;
+    }
+
+    public void RemoveOnDestinationReachedEvent(OnDestinationReached onDestinationReachedEvent) {
+        onDestinationReached -= onDestinationReachedEvent;
+    }
+
+    public void SetPath(List<Vector2Int> path, OnDestinationReached onDestinationReachedEvent = null) {
+        
+        if(onDestinationReachedEvent != null) {
+            onDestinationReached += onDestinationReachedEvent;
+        }
+
+
         this.path = new Queue<Vector2Int>(path);
         TargetGridPos = this.path.Dequeue();
     }
 
-    public void SetGridTarget(Vector2Int targetCell) {
+    public void SetGridTarget(Vector2Int targetCell) 
+    {
         SetPath(new List<Vector2Int>() { targetCell } );
     }
 

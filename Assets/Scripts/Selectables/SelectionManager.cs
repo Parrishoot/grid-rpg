@@ -33,8 +33,10 @@ public class SelectionManager : Singleton<SelectionManager>
         SetupDefaultListener();
     }
 
-    public void EndListening() {
-        SetupDefaultListener();
+    public void EndListening(bool setupDefaultListener = true) {
+        if(setupDefaultListener) {
+            SetupDefaultListener();
+        }
     }
 
     public void AssignListener(UserConfirmGridSpaceSelector selectableListener) {
@@ -43,7 +45,7 @@ public class SelectionManager : Singleton<SelectionManager>
 
     private void CheckForMouseClickOnSelectable() {
         
-        if(MouseUtil.IsMouseOverUI()) {
+        if(MouseUtil.IsMouseOverUI() || Listener == null) {
            return; 
         }
 
