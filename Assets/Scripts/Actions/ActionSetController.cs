@@ -13,7 +13,7 @@ where T: CharacterManager
 
     protected List<ActionController<T>> actionControllers;
 
-    private void Start() {
+    protected virtual void Start() {
         SetupControllers();
     }
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyTurnController : CharacterTurnController
 {
+    public EnemyActionSetController enemyActionSetController;
+
     public override void BeginTurn()
     {
-        EnemyWalkIngester walkIngester = new EnemyWalkIngester(this, characterManager.CharacterGridMover);
-        new EnemyRandomGridSelectorBuilder(walkIngester).WithFilter(new WalkableRangeFilter(characterManager.CharacterGridMover.CurrentGridPos, 2))
-                                                        .Build()
-                                                        .GatherSelections();
+        enemyActionSetController.PerformAction();
+        EndTurn();
     }
 }

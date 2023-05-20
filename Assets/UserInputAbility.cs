@@ -4,19 +4,8 @@ using UnityEngine;
 
 public abstract class UserInputAbility: SelectionAbility
 {
-
-    private UserGridSelectionListener userGridSelectionListener;
-
     protected override GridSpaceSelector GetSpaceSelector(CharacterManager characterManager) {
-
-        // TODO: Maybe change this to typed generics
-        // once I figured out how to get it to serialize
-        // with Unity's goddamn inspector...  
-        PlayerCharacterManager playerCharacterManager = (PlayerCharacterManager) characterManager;
-
-        userGridSelectionListener = new UserGridSelectionListenerBuilder(GetIngester(characterManager), playerCharacterManager.SelectionController).WithFilter(GetFilter(characterManager)).Build();
-
-        return userGridSelectionListener;
+        return characterManager.SelectionController.GetSelector(GetIngester(characterManager), GetFilter(characterManager));
     }
 
     public override abstract string GetDescription();

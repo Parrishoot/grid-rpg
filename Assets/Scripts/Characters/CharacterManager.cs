@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class CharacterManager : MonoBehaviour
 {
 
@@ -16,4 +17,7 @@ public class CharacterManager : MonoBehaviour
 
     [field: SerializeField]
     public Selectable CharacterSelectable { get; set; }
+
+    [field: SerializeField]
+    public CharacterSelectionController SelectionController { get; set; }
 }

@@ -20,7 +20,7 @@ public class DamageAbility : UserInputAbility
     {
         GridFilter gridFilter = new GridFilter();
         gridFilter.AddFilter(new RangeFilter(characterManager.CharacterGridMover.CurrentGridPos, range));
-        gridFilter.AddFilter(new OccupantFilter<EnemySelectable>());
+        gridFilter.AddFilter(characterManager.SelectionController.GetEnemyOccupantFilter());
 
         return gridFilter;
     }

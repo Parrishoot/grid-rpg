@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerSelectionController : MonoBehaviour
+[System.Serializable]
+public class PlayerSelectionController : CharacterSelectionController
 {
 
     public Button confirmButton;
@@ -65,5 +67,28 @@ public class PlayerSelectionController : MonoBehaviour
 
     public GridSpaceSelectable[] GetSelectables() {
         return FindObjectsOfType<GridSpaceSelectable>();
+    }
+
+    public override GridSpaceSelector GetSelectAllSelector(ISelectableIngester ingester, GridFilter gridFilter)
+    {
+        return new GridAutoSelectorBuilder(ingester, this).WithFilter(gridFilter)
+                                                          .Build();
+    }
+
+    public override GridSpaceSelector GetSelector(ISelectableIngester ingester, GridFilter gridFilter, int numTargets = 1)
+    {
+        return new UserGridSelectionListenerBuilder(ingester, this).WithFilter(gridFilter)
+                                                                   .WithNumTargets(numTargets)
+                                                                   .Build();
+    }
+
+    public override ISelectableFilter GetEnemyOccupantFilter()
+    {
+        return new OccupantFilter<EnemySelectable>();
+    }
+
+    public override ISelectableFilter GetAllyOccupantFilter()
+    {
+        return new OccupantFilter<PlayerSelectable>();
     }
 }

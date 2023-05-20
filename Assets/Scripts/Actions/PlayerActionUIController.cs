@@ -18,7 +18,7 @@ public class PlayerActionUIController : MonoBehaviour
 
     private UITweener parentPanelTweener;
 
-    private ActionController<PlayerCharacterManager> actionController;
+    private ActionController<CharacterManager> actionController;
 
     public Color baseColor;
 
@@ -28,7 +28,7 @@ public class PlayerActionUIController : MonoBehaviour
         this.baseColor = this.button.GetComponent<Image>().color;
     }
 
-    public void Init(ActionController<PlayerCharacterManager> actionController) {
+    public void Init(ActionController<CharacterManager> actionController) {
 
         parentPanelTweener = GetComponentInParent<UITweener>();
 
