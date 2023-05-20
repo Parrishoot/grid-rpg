@@ -13,7 +13,7 @@ public abstract class CharacterTurnController: MonoBehaviour
         return characterManager.CharacterStats.GetControllerForStat(StatType.SPEED).Value;
     }
 
-    public void EndTurn() {
+    public virtual void EndTurn() {
         TurnManager.GetInstance().StartNextTurn();
     }
 }

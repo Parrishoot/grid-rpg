@@ -239,9 +239,9 @@ GameObject:
   - component: {fileID: 4734436291098284008}
   - component: {fileID: 632301635296385332}
   - component: {fileID: 4699917143032081188}
-  - component: {fileID: 7124475115428050327}
   - component: {fileID: 8781346820552810783}
   - component: {fileID: 7552330829706501144}
+  - component: {fileID: 3203838890939501956}
   m_Layer: 5
   m_Name: ActionUI
   m_TagString: Untagged
@@ -310,25 +310,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7124475115428050327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6316147851757269105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b8f26a62f525614f960f0f1e54b088a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 7552330829706501144}
-  nameText: {fileID: 1976233710368792978}
-  staminaCostText: {fileID: 5617119072298142076}
-  descriptionText: {fileID: 5073323679760362103}
-  descriptionTweener: {fileID: 6683452373700514311}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  augmentedColor: {r: 1, g: 0.5727849, b: 0, a: 1}
 --- !u!114 &8781346820552810783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +327,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7124475115428050327}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: ActionUIController, Assembly-CSharp
           m_MethodName: ShowDescription
           m_Mode: 1
@@ -362,7 +343,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7124475115428050327}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: ActionUIController, Assembly-CSharp
           m_MethodName: HideDescription
           m_Mode: 1
@@ -424,6 +405,25 @@ MonoBehaviour:
   onMiddleClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3203838890939501956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6316147851757269105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8f26a62f525614f960f0f1e54b088a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 7552330829706501144}
+  nameText: {fileID: 1976233710368792978}
+  staminaCostText: {fileID: 5617119072298142076}
+  descriptionText: {fileID: 5073323679760362103}
+  descriptionTweener: {fileID: 6683452373700514311}
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  augmentedColor: {r: 0.8113208, g: 0.51496094, b: 0, a: 0}
 --- !u!1 &6440504335409179364
 GameObject:
   m_ObjectHideFlags: 0

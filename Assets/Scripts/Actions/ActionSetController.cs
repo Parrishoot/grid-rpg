@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class ActionSetController : MonoBehaviour
+public class ActionSetController<T> : MonoBehaviour
+where T: CharacterManager
 {
-    public List<Action> availableActions;
+    [SerializeField]
+    public Action[] availableActions;
 
-    public ActionSetUIController actionSetUIController;
+    public T characterManager;
 
-    public CharacterManager characterManager;
-
-    private List<ActionController> actionControllers;
+    protected List<ActionController<T>> actionControllers;
 
     private void Start() {
         SetupControllers();
     }
 
-    private void SetupControllers() {
-        actionControllers = availableActions.Select(x => new ActionController(x, characterManager)).ToList();
-        actionSetUIController.SetupUI(actionControllers);
+    protected virtual void SetupControllers() {
+        actionControllers = availableActions.Select(x => new ActionController<T>(x, characterManager)).ToList();
     }
 }

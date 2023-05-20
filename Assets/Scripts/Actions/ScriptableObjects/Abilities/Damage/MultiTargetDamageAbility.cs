@@ -16,8 +16,10 @@ public class MultiTargetDamageAbility : DamageAbility
     }
 
     protected override GridSpaceSelector GetSpaceSelector(CharacterManager characterManager) {
-        return new UserGridSelectionListenerBuilder(GetIngester(characterManager)).WithFilter(GetFilter(characterManager))
-                                                                              .WithNumTargets(numTargets)
-                                                                              .Build();
+
+        PlayerCharacterManager playerCharacterManager = (PlayerCharacterManager) characterManager;
+        return new UserGridSelectionListenerBuilder(GetIngester(characterManager),playerCharacterManager.SelectionController).WithFilter(GetFilter(characterManager))
+                                                                                                                             .WithNumTargets(numTargets)
+                                                                                                                             .Build();
     }
 }

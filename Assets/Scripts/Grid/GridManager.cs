@@ -85,6 +85,14 @@ public class GridManager : Singleton<GridManager>
         return path;
     }
 
+    public List<GridSpace> GetSpaces() {
+        return gridSpaces.GetValues().ToList();
+    }
+
+    public List<GridSpaceSelectable> GetSpacesSelectables() {
+        return GetSpaces().Select(x => x.gridSpaceSelectable).ToList();
+    }
+
     public void InitGrid() {
 
         foreach(GridSpace gridSpace in FindObjectsOfType<GridSpace>()) {

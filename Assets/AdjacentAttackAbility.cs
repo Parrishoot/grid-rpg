@@ -13,7 +13,10 @@ public class ShockwaveAttackAbility : DamageAbility
     }
 
     protected override GridSpaceSelector GetSpaceSelector(CharacterManager characterManager) {
-        return new GridAutoSelectorBuilder(GetIngester(characterManager)).WithFilter(GetFilter(characterManager))
-                                                                         .Build();
+
+        PlayerCharacterManager playerCharacterManager = (PlayerCharacterManager) characterManager;
+
+        return new GridAutoSelectorBuilder(GetIngester(characterManager), playerCharacterManager.SelectionController).WithFilter(GetFilter(characterManager))
+                                                                                                                     .Build();
     }
 }

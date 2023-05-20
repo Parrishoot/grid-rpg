@@ -10,9 +10,9 @@ public class CharacterSelectableStateController : MonoBehaviour, ISelectableStat
     public Material selectedMaterial;
 
     [SerializeField]
-    private UIController statsUIController;
+    protected UIController statsUIController;
 
-    private MeshRenderer meshRenderer;
+    protected MeshRenderer meshRenderer;
 
     public void Start() {
         meshRenderer = GetComponent<MeshRenderer>();

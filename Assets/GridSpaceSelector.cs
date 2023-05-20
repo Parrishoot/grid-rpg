@@ -21,6 +21,8 @@ public abstract class GridSpaceSelector
     }
 
     public virtual List<GridSpaceSelectable> GetSelectableSpaces() {
-        return SelectionManager.GetInstance().GetSelectables().ToList().FindAll(x => gridFilter.Evaluate(x));
+        return GridManager.GetInstance()
+                          .GetSpacesSelectables()
+                          .FindAll(x => gridFilter.Evaluate(x));
     }
 }

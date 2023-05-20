@@ -17,22 +17,11 @@ public class GridSpace: MonoBehaviour
     }
 
     public void SetOccupant(Selectable occupant) {
-
         // Reset the current occupant space and check if it's selectable
         occupant.transform.SetParent(occupantsParentTransform, true);
-
-        SelectionManager selectionManager = SelectionManager.GetInstance();
-
-        if(selectionManager.Listener != null) {
-            occupant.Space.ReevaluateSpace();
-        } 
         
         // Reset the target occuparnt space and check if it's selectable
         occupant.Space = this;
-
-        if(selectionManager.Listener != null) {
-            SelectionManager.GetInstance().Listener.ResetSelectableStatus(gridSpaceSelectable);
-        }   
     }
 
     public Selectable[] GetOccupants() {
@@ -54,10 +43,6 @@ public class GridSpace: MonoBehaviour
         else {
             return Mathf.Max(Mathf.Abs(CellCoords.x - cell.x), Mathf.Abs(CellCoords.y - cell.y));
         } 
-    }
-
-    public void ReevaluateSpace() {
-        SelectionManager.GetInstance().Listener.ResetSelectableStatus(gridSpaceSelectable);
     }
 
     public bool IsAccessible() {

@@ -13,4 +13,7 @@ public class CharacterManager : MonoBehaviour
 
     [field: SerializeField]
     public StaminaController StaminaController { get; set; }
+
+    [field: SerializeField]
+    public Selectable CharacterSelectable { get; set; }
 }

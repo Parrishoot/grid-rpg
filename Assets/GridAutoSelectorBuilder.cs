@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class GridAutoSelectorBuilder : GridSpaceSelectorBuilder<GridAutoSelector, GridAutoSelectorBuilder>
 {
-    public GridAutoSelectorBuilder(ISelectableIngester ingester) : base(ingester)
+
+    PlayerSelectionController playerSelectionController;
+
+    public GridAutoSelectorBuilder(ISelectableIngester ingester, PlayerSelectionController playerSelectionController) : base(ingester)
     {
+        this.playerSelectionController = playerSelectionController;
     }
 
     public override GridAutoSelector Build()
     {
-        return new GridAutoSelector(ingester, gridFilter);
+        return new GridAutoSelector(ingester, gridFilter, playerSelectionController);
     }
 }

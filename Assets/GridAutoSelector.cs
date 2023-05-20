@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class GridAutoSelector : UserConfirmGridSpaceSelector
 {
-    public GridAutoSelector(ISelectableIngester ingester, GridFilter gridFilter) : base(ingester, gridFilter)
+    public GridAutoSelector(ISelectableIngester ingester, GridFilter gridFilter, PlayerSelectionController playerSelectionController) : base(ingester, gridFilter, playerSelectionController)
     {
 
     }
 
     public override void GatherSelections()
     {
-        base.GatherSelections();
-
         // TODO: Maybe make this more efficient
         foreach(GridSpaceSelectable selectable in GetSelectableSpaces()) {
             base.Select(selectable);
@@ -21,7 +19,7 @@ public class GridAutoSelector : UserConfirmGridSpaceSelector
 
     public override void Deselect()
     {
-        
+        playerSelectionController.EndListening();
     }
 
     public override void Select(GridSpaceSelectable gridSpaceSelectable)

@@ -8,8 +8,10 @@ public class Action : ScriptableObject
     public string actionName;
 
     public int cost = 10;
-
+ 
+    [SerializeField]
     public Ability active;
 
+    [SerializeField]
     public Ability passive;
 }

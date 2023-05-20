@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4130384561592982839, guid: 3e7e2b3b391d9c74bb14e3fe5d2c25a0, type: 3}
+      propertyPath: <CharacterSelectable>k__BackingField
+      value: 
+      objectReference: {fileID: 9037809317324260857}
     - target: {fileID: 4167923612086003523, guid: 3e7e2b3b391d9c74bb14e3fe5d2c25a0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

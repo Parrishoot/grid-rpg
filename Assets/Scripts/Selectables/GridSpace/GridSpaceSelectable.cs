@@ -13,7 +13,6 @@ public class GridSpaceSelectable : Selectable
 
     public override void Start()
     {
-        this.selectionManager = SelectionManager.GetInstance();
         StateControllers = new List<ISelectableStateController>();
         StateControllers.Add(GridSelectableStateController);
     }
@@ -53,7 +52,7 @@ public class GridSpaceSelectable : Selectable
         
         base.OnMouseExit();
 
-        if(enabled && !Selected && !selectionManager.DefaultListenerActive()) {
+        if(enabled && !Selected) {
             GridSelectableStateController.SetSelectable();
         }
     }

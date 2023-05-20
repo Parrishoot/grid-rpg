@@ -10,7 +10,7 @@ public class UserGridSelectionListener: UserConfirmGridSpaceSelector {
 
     private bool exact = false;
 
-    public UserGridSelectionListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter): base(ingester, gridFilter) {
+    public UserGridSelectionListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter, PlayerSelectionController playerSelectionController): base(ingester, gridFilter, playerSelectionController) {
         this.numTargets = numTargets;
         this.exact = exact;
     }
@@ -50,8 +50,6 @@ public class UserGridSelectionListener: UserConfirmGridSpaceSelector {
             GridSpaceSelectable selectable = selections.Pop();
             selectable.Deselect();
         }
-        else {
-            SelectionManager.GetInstance().EndListening();
-        }
+        Cancel();
     }
 }

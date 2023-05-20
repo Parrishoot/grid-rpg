@@ -230,6 +230,7 @@ MonoBehaviour:
   <CharacterGridMover>k__BackingField: {fileID: 6410588646524662294}
   <CharacterStats>k__BackingField: {fileID: 1270374560214003477}
   <StaminaController>k__BackingField: {fileID: 1562026238164317669}
+  <CharacterSelectable>k__BackingField: {fileID: 1240852770091461742}
 --- !u!114 &1270374560214003477
 MonoBehaviour:
   m_ObjectHideFlags: 0

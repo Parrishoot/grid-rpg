@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
 
 public abstract class UserConfirmGridSpaceSelector : GridSpaceSelector
@@ -8,8 +6,11 @@ public abstract class UserConfirmGridSpaceSelector : GridSpaceSelector
 
     protected Stack<GridSpaceSelectable> selections = new Stack<GridSpaceSelectable>();
 
-    public UserConfirmGridSpaceSelector(ISelectableIngester ingester, GridFilter gridFilter) : base(ingester, gridFilter)
+    protected PlayerSelectionController playerSelectionController;
+
+    public UserConfirmGridSpaceSelector(ISelectableIngester ingester, GridFilter gridFilter, PlayerSelectionController playerSelectionController) : base(ingester, gridFilter)
     {
+        this.playerSelectionController = playerSelectionController;
     }
 
     protected void DeselectAll() {
@@ -17,15 +18,15 @@ public abstract class UserConfirmGridSpaceSelector : GridSpaceSelector
             selections.Pop().Deselect();
         }
     }
-
     
     public void ProcessSelections() {
         base.ProcessSelections(selections.ToList());
         DeselectAll();
+        Cancel();
     }
 
     public override void GatherSelections() {
-        SelectionManager.GetInstance().AssignListener(this);
+        playerSelectionController.AssignListener(this);
     }
 
     public virtual void ResetSelectableStatus(GridSpaceSelectable gridSpaceSelectable) {
@@ -36,9 +37,16 @@ public abstract class UserConfirmGridSpaceSelector : GridSpaceSelector
 
         List<GridSpaceSelectable> selectableSpaces = GetSelectableSpaces();
 
-        foreach(GridSpaceSelectable gridSpaceSelectable in SelectionManager.GetInstance().GetSelectables()) {
+        foreach(GridSpaceSelectable gridSpaceSelectable in GridManager.GetInstance().GetSpacesSelectables()) {
             ResetSelectableStatus(gridSpaceSelectable);
         }
+    }
+
+    public void Cancel() {
+        foreach(GridSpaceSelectable gridSpaceSelectable in GridManager.GetInstance().GetSpacesSelectables()) {
+            gridSpaceSelectable.SetSelectable(false);
+        }
+        playerSelectionController.Listener = null;
     }
 
     public abstract bool SelectionFinished();

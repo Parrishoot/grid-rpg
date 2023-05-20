@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Selectable : MonoBehaviour {
 
-    protected SelectionManager selectionManager;
-
     public bool Selected { get; set; } = false;
 
     public bool Hovering { get; set; } = false;
@@ -43,7 +41,6 @@ public class Selectable : MonoBehaviour {
     }
 
     public virtual void Start() {
-        this.selectionManager = SelectionManager.GetInstance();
 
         if(Space == null) {    
             Space = GridManager.GetInstance().GetClosestGridSpaceToPos(transform.position);
@@ -58,7 +55,7 @@ public class Selectable : MonoBehaviour {
     }
 
     protected virtual void OnMouseEnter() {
-        if(!MouseUtil.IsMouseOverUI()) {
+        if(!MouseUtil.IsMouseOverUI() && enabled) {
             Hovering = true;
 
             foreach(ISelectableStateController stateController in StateControllers) {
@@ -69,12 +66,12 @@ public class Selectable : MonoBehaviour {
 
     protected virtual void OnMouseExit() {
         
-        if(!Selected) {
+        if(!Selected && enabled) {
             foreach(ISelectableStateController stateController in StateControllers) {
                 stateController.SetIdle();
             }
         }
-        else {
+        else if(enabled){
             foreach(ISelectableStateController stateController in StateControllers) {
                 stateController.SetSelected();
             }

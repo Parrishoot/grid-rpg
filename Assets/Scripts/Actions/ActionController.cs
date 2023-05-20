@@ -4,22 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class ActionController
+public class ActionController<T>
+where T: CharacterManager
 {
     [field: SerializeField]
     public Action Action { get; set; }
 
-    private CharacterManager characterManager;
+    protected T characterManager;
 
     public bool Augmented { get; set; } = false;
 
-    public ActionController(Action action, CharacterManager characterManager) {
-        this.Action = action;
-        this.characterManager = characterManager;
-
+    public ActionController() {
+     
     }
 
-    public void Activate() {
+    public ActionController(Action action, T characterManager) {
+        this.Action = action;
+        this.characterManager = characterManager;
+    }
+
+    public void SetCharacterManager(T characterManager) {
+        this.characterManager = characterManager;
+    }
+
+    public virtual void Activate() {
         // TODO: MOVE THIS OUT OF HERE
         characterManager.CharacterStats.GetStaminaController().Lose(Action.cost);
         Action.active.Apply(characterManager);

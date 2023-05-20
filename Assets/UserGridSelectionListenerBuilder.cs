@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class UserGridSelectionListenerBuilder : UserGridSelectionListenerBuilderBase<UserGridSelectionListener>
 {
-    public UserGridSelectionListenerBuilder(ISelectableIngester ingester) : base(ingester)
+
+    private PlayerSelectionController playerSelectionController;
+
+    public UserGridSelectionListenerBuilder(ISelectableIngester ingester, PlayerSelectionController playerSelectionController) : base(ingester)
     {
+        this.playerSelectionController = playerSelectionController;
     }
 
     public override UserGridSelectionListener Build()
     {
-        return new UserGridSelectionListener(ingester, numTargets, exact, gridFilter);
+        return new UserGridSelectionListener(ingester, numTargets, exact, gridFilter, playerSelectionController);
     }
 }

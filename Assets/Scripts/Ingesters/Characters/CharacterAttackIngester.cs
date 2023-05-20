@@ -15,6 +15,5 @@ public class CharacterAttackIngester : ISelectableIngester
         foreach(GridSpaceSelectable selection in selections) {
             selection.Space.GetOccupantsParentTransform().GetComponentInChildren<CharacterStats>().GetHealthController().Lose(this.power);
         }
-        SelectionManager.GetInstance().EndListening();
     }
 }
