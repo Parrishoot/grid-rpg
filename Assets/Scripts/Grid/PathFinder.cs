@@ -5,25 +5,26 @@ using System.Linq;
 
 public class PathFinder
 {
-    private SerializableMatrix<PathNode> grid;
+    private SerializableMatrix<PathNode> pathGrid;
 
-    public PathFinder(SerializableMatrix<GridSpace> grid) {
-        this.grid = new SerializableMatrix<PathNode>(grid.Width, grid.Height);
-        this.grid.SetValues(grid.GetValues().Select(x => new PathNode(x.CellCoords, this.grid, x.IsAccessible())).ToArray());
+    public PathFinder() {
+        
     }
 
-    public List<PathNode> FindPath(Vector2Int start, Vector2Int end) {
+    public List<PathNode> FindPath(SerializableMatrix<GridSpace> grid, Vector2Int start, Vector2Int end) {
 
-        PathNode startNode = grid[start.x, start.y];
-        PathNode endNode = grid[end.x, end.y];
+        ResetGrid(grid);
+
+        PathNode startNode = pathGrid[start.x, start.y];
+        PathNode endNode = pathGrid[end.x, end.y];
 
         List<PathNode> openList = new List<PathNode>() { startNode };
         List<PathNode> closedList = new List<PathNode>();
 
         // Initialize Path
-        for(int x = 0; x < this.grid.Width; x++) {
-            for(int y = 0; y < this.grid.Width; y++) {
-                PathNode pathNode = this.grid[x, y];
+        for(int x = 0; x < this.pathGrid.Width; x++) {
+            for(int y = 0; y < this.pathGrid.Width; y++) {
+                PathNode pathNode = this.pathGrid[x, y];
                 pathNode.GCost = int.MaxValue;
                 pathNode.CalculateFCost();
                 pathNode.CameFrom = null;
@@ -82,19 +83,19 @@ public class PathFinder
         List<PathNode> neighborList = new List<PathNode>();
 
         if(currentNode.Origin.x > 0) {
-            neighborList.Add(this.grid[currentNode.Origin.x - 1, currentNode.Origin.y]);
+            neighborList.Add(this.pathGrid[currentNode.Origin.x - 1, currentNode.Origin.y]);
         }
 
-        if(currentNode.Origin.x < this.grid.Width - 1) {
-            neighborList.Add(this.grid[currentNode.Origin.x + 1, currentNode.Origin.y]);
+        if(currentNode.Origin.x < this.pathGrid.Width - 1) {
+            neighborList.Add(this.pathGrid[currentNode.Origin.x + 1, currentNode.Origin.y]);
         }
 
         if(currentNode.Origin.y > 0) {
-            neighborList.Add(this.grid[currentNode.Origin.x, currentNode.Origin.y - 1]);
+            neighborList.Add(this.pathGrid[currentNode.Origin.x, currentNode.Origin.y - 1]);
         }
 
-        if(currentNode.Origin.y < this.grid.Height - 1) {
-            neighborList.Add(this.grid[currentNode.Origin.x, currentNode.Origin.y + 1]);
+        if(currentNode.Origin.y < this.pathGrid.Height - 1) {
+            neighborList.Add(this.pathGrid[currentNode.Origin.x, currentNode.Origin.y + 1]);
         }
 
         return neighborList;
@@ -130,5 +131,10 @@ public class PathFinder
         }
 
         return lowestFCostPathNode;
+    }
+
+    private void ResetGrid(SerializableMatrix<GridSpace> grid) {
+        this.pathGrid = new SerializableMatrix<PathNode>(grid.Width, grid.Height);
+        this.pathGrid.SetValues(grid.GetValues().Select(x => new PathNode(x.CellCoords, this.pathGrid, x.IsAccessible())).ToArray());
     }
 }
