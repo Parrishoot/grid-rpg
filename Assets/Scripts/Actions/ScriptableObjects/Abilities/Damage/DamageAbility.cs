@@ -27,6 +27,7 @@ public class DamageAbility : UserInputAbility
 
     protected override ISelectableIngester GetIngester(CharacterManager characterManager)
     {
-        return new CharacterAttackIngester(characterManager.CharacterStats.Power + power);
+        ISelectableIngester ingester = new CharacterAttackIngester(characterManager.CharacterStats.Power + power);
+        return ingester;
     }
 }

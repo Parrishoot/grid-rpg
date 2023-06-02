@@ -43,7 +43,7 @@ public class GridMover : MonoBehaviour
         else if (CurrentGridPos != TargetGridPos) {
 
             onDestinationReached?.Invoke();
-            // onDestinationReached = null;
+            onDestinationReached = null;
 
             gridManager.GetGridSpaceAtCell(TargetGridPos).SetOccupant(selectable);
             CurrentGridPos = TargetGridPos;

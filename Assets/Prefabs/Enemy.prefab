@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: <SelectionController>k__BackingField
       value: 
       objectReference: {fileID: 3021234383181219107}
+    - target: {fileID: 4130384561592982839, guid: 3e7e2b3b391d9c74bb14e3fe5d2c25a0, type: 3}
+      propertyPath: <CharacterTurnController>k__BackingField
+      value: 
+      objectReference: {fileID: 4154917776014746323}
     - target: {fileID: 4167923612086003523, guid: 3e7e2b3b391d9c74bb14e3fe5d2c25a0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -381,6 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc894afb6ab55af45a5c5b526f78b581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterManager: {fileID: 7231654695437594625}
 --- !u!114 &6016120858216580563
 MonoBehaviour:
   m_ObjectHideFlags: 0

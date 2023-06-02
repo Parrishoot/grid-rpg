@@ -22,6 +22,7 @@ public class EnemySelectionController : CharacterSelectionController
 
     public override GridSpaceSelector GetSelector(ISelectableIngester ingester, GridFilter gridFilter, int numTargets = 1)
     {
+        ingester.OnIngestionFinished.AddOnEvent(characterManager.CharacterTurnController.EndTurn);
         return new EnemyRandomGridSelectorBuilder(ingester).WithFilter(gridFilter)
                                                            .Build();
     }

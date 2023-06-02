@@ -6,16 +6,15 @@ public class CharacterWalkIngester : ISelectableIngester
 {
     protected GridMover gridMover;
 
-    public CharacterWalkIngester(GridMover gridMover) {
+    protected CharacterTurnController characterTurnController;
+
+    public CharacterWalkIngester(GridMover gridMover, CharacterTurnController characterTurnController) {
         this.gridMover = gridMover;
+        this.characterTurnController = characterTurnController;
     }
 
-    public void ProcessSelections(List<GridSpaceSelectable> selections)
+    public override void ProcessSelections(List<GridSpaceSelectable> selections)
     {
-        gridMover.SetPath(selections[0].GetPath(), OnDestinationReached);
-    }
-
-    protected virtual void OnDestinationReached() {
-        
+        gridMover.SetPath(selections[0].GetPath(), ProcessPostIngestion);
     }
 }

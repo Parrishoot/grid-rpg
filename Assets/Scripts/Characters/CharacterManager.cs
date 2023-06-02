@@ -20,4 +20,7 @@ public class CharacterManager : MonoBehaviour
 
     [field: SerializeField]
     public CharacterSelectionController SelectionController { get; set; }
+
+    [field: SerializeField]
+    public CharacterTurnController CharacterTurnController { get; set; }
 }

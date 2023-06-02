@@ -10,7 +10,7 @@ public class CharacterAttackIngester : ISelectableIngester
         this.power = power;
     }
 
-    public void ProcessSelections(List<GridSpaceSelectable> selections)
+    public override void ProcessSelections(List<GridSpaceSelectable> selections)
     {
         foreach(GridSpaceSelectable selection in selections) {
             selection.Space.GetOccupantsParentTransform().GetComponentInChildren<CharacterStats>().GetHealthController().Lose(this.power);

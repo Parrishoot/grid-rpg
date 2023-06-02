@@ -24,6 +24,6 @@ public class WalkAbility : UserInputAbility
 
     protected override ISelectableIngester GetIngester(CharacterManager characterManager)
     {
-        return new CharacterWalkIngester(characterManager.CharacterGridMover);
+        return new CharacterWalkIngester(characterManager.CharacterGridMover, characterManager.CharacterTurnController);
     }
 }

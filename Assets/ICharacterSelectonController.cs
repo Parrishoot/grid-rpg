@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class CharacterSelectionController: MonoBehaviour
 {
+    public CharacterManager characterManager;
+
     public abstract GridSpaceSelector GetSelectAllSelector(ISelectableIngester ingester, GridFilter gridFilter);
 
     public abstract GridSpaceSelector GetSelector(ISelectableIngester ingester, GridFilter gridFilter, int numTargets = 1);

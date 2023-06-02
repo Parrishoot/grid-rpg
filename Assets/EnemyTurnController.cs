@@ -8,7 +8,7 @@ public class EnemyTurnController : CharacterTurnController
 
     public override void BeginTurn()
     {
+        
         enemyActionSetController.PerformAction();
-        EndTurn();
     }
 }

@@ -27,7 +27,7 @@ public class GridManager : Singleton<GridManager>
     }
 
     private void Start() {
-        pathFinder = new PathFinder(gridSpaces);    
+        pathFinder = new PathFinder();    
     }
 
     public Vector3 GetClosestCellPosToMouse() {
@@ -76,7 +76,7 @@ public class GridManager : Singleton<GridManager>
     }
 
     public List<PathNode> FindPath(Vector2Int start, Vector2Int end, int maxDistance = -1) {
-        List<PathNode> path = pathFinder.FindPath(start, end);
+        List<PathNode> path = pathFinder.FindPath(gridSpaces, start, end);
 
         if(path != null && maxDistance != -1 && path.Count > maxDistance + 1) {
             return null;
