@@ -1,15 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
-public abstract class ISelectableIngester
+public abstract class SelectableIngester
 {
 
     public DelegateManager OnIngestionFinished { get; set; } = new DelegateManager();
 
-    public abstract void ProcessSelections(List<GridSpaceSelectable> selections);
+    protected Stack<GridSpaceSelectable> selections = new Stack<GridSpaceSelectable>();
+
+    public abstract void ProcessSelections();
 
     public virtual void ProcessPostIngestion() {
         OnIngestionFinished.Invoke();
+    }
+
+    public virtual GridSpaceSelectable RemoveSelection() {
+        return selections.Pop();
+    }
+
+    public virtual void AddSelection(GridSpaceSelectable selection) {
+        selections.Push(selection);
+    }
+
+    public virtual void AddSelections(List<GridSpaceSelectable> selections) {
+        foreach(GridSpaceSelectable selection in selections) {
+            AddSelection(selection);
+        }
+    }
+
+    public List<GridSpaceSelectable> GetSelections() {
+        return selections.ToList();
     }
 }

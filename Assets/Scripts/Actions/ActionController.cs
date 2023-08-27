@@ -30,6 +30,7 @@ where T: CharacterManager
     public virtual void Activate() {
         // TODO: MOVE THIS OUT OF HERE
         characterManager.CharacterStats.GetStaminaController().Lose(Action.cost);
+        Action.active.Reset();
         Action.active.Apply(characterManager);
     }
 

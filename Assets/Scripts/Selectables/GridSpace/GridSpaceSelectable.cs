@@ -63,6 +63,10 @@ public class GridSpaceSelectable : Selectable
         }
     }
 
+    public void SetPath(List<Vector2Int> path) {
+        this.shortestPathToCurrentSelectable = path;
+    }
+
     public List<Vector2Int> GetPath() {
         return this.shortestPathToCurrentSelectable;
     }

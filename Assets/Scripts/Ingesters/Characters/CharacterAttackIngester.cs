@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAttackIngester : ISelectableIngester
+public class CharacterAttackIngester : SelectableIngester
 {
     private int power;
 
@@ -10,9 +10,10 @@ public class CharacterAttackIngester : ISelectableIngester
         this.power = power;
     }
 
-    public override void ProcessSelections(List<GridSpaceSelectable> selections)
+    public override void ProcessSelections()
     {
-        foreach(GridSpaceSelectable selection in selections) {
+        while(selections.Count > 0) {
+            GridSpaceSelectable selection = selections.Pop();
             selection.Space.GetOccupantsParentTransform().GetComponentInChildren<CharacterStats>().GetHealthController().Lose(this.power);
         }
     }

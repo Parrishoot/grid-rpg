@@ -7,7 +7,7 @@ public class GridAutoSelectorBuilder : GridSpaceSelectorBuilder<GridAutoSelector
 
     PlayerSelectionController playerSelectionController;
 
-    public GridAutoSelectorBuilder(ISelectableIngester ingester, PlayerSelectionController playerSelectionController) : base(ingester)
+    public GridAutoSelectorBuilder(SelectableIngester ingester, PlayerSelectionController playerSelectionController) : base(ingester)
     {
         this.playerSelectionController = playerSelectionController;
     }

@@ -1,45 +1,31 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 public abstract class UserConfirmGridSpaceSelector : GridSpaceSelector
 {
 
-    protected Stack<GridSpaceSelectable> selections = new Stack<GridSpaceSelectable>();
-
     protected PlayerSelectionController playerSelectionController;
 
-    public UserConfirmGridSpaceSelector(ISelectableIngester ingester, GridFilter gridFilter, PlayerSelectionController playerSelectionController) : base(ingester, gridFilter)
+    public UserConfirmGridSpaceSelector(SelectableIngester ingester, GridFilter gridFilter, PlayerSelectionController playerSelectionController, int numTargets = 1, bool exact = true) : base(ingester, gridFilter, numTargets, exact)
     {
         this.playerSelectionController = playerSelectionController;
     }
 
     protected void DeselectAll() {
-        while(selections.Count > 0) {
-            selections.Pop().Deselect();
+        while(ingester.GetSelections().Count > 0) {
+            ingester.RemoveSelection();
         }
     }
     
-    public void ProcessSelections() {
-        base.ProcessSelections(selections.ToList());
+    public override void ProcessSelections() {
+        base.ProcessSelections();
         DeselectAll();
         Cancel();
     }
 
     public override void GatherSelections() {
         playerSelectionController.AssignListener(this);
-    }
-
-    public virtual void ResetSelectableStatus(GridSpaceSelectable gridSpaceSelectable) {
-        gridSpaceSelectable.SetSelectable(gridFilter.Evaluate(gridSpaceSelectable));
-    }
-
-    public virtual void SetEnabledSelectables() {
-
-        List<GridSpaceSelectable> selectableSpaces = GetSelectableSpaces();
-
-        foreach(GridSpaceSelectable gridSpaceSelectable in GridManager.GetInstance().GetSpacesSelectables()) {
-            ResetSelectableStatus(gridSpaceSelectable);
-        }
     }
 
     public void Cancel() {
@@ -56,7 +42,8 @@ public abstract class UserConfirmGridSpaceSelector : GridSpaceSelector
     public virtual void Select(GridSpaceSelectable gridSpace) {
         if(!gridSpace.Selected) {
             gridSpace.Select();
-            selections.Push(gridSpace);
+            ingester.AddSelection(gridSpace);
+
         }
     }
 }

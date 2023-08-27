@@ -20,8 +20,6 @@ public class RangeFilter : ISelectableFilter
     {
         int distance = GetDistance(gridSpace);
         return distance != 0 && distance <= range;
-        
-
     }
 
     protected int GetDistance(GridSpaceSelectable gridSpace) {

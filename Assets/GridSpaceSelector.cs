@@ -5,24 +5,34 @@ using System.Linq;
 
 public abstract class GridSpaceSelector
 {
-    protected ISelectableIngester ingester;
+    protected SelectableIngester ingester;
 
     protected GridFilter gridFilter;
 
-    public GridSpaceSelector(ISelectableIngester ingester, GridFilter gridFilter) {
+    protected int numSelections;
+
+    protected bool exact;
+
+    public GridSpaceSelector(SelectableIngester ingester, GridFilter gridFilter, int numSelections = 1, bool exact = true) {
         this.ingester = ingester;
         this.gridFilter = gridFilter;
+        this.numSelections = numSelections;
+        this.exact = exact;
     }
 
     public abstract void GatherSelections();
 
-    public virtual void ProcessSelections(List<GridSpaceSelectable> selections) {
-        ingester.ProcessSelections(selections);
+    public virtual void ProcessSelections() {
+        ingester.ProcessSelections();
     }
 
-    public virtual List<GridSpaceSelectable> GetSelectableSpaces() {
+    public virtual List<GridSpaceSelectable> GetSelectableSpaces(List<GridSpaceSelectable> selections = null) {
         return GridManager.GetInstance()
                           .GetSpacesSelectables()
                           .FindAll(x => gridFilter.Evaluate(x));
+    }
+
+    public SelectableIngester GetIngester() {
+        return ingester;
     }
 }

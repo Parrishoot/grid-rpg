@@ -25,9 +25,9 @@ public class DamageAbility : UserInputAbility
         return gridFilter;
     }
 
-    protected override ISelectableIngester GetIngester(CharacterManager characterManager)
+    protected override SelectableIngester GetIngester(CharacterManager characterManager)
     {
-        ISelectableIngester ingester = new CharacterAttackIngester(characterManager.CharacterStats.Power + power);
+        SelectableIngester ingester = new CharacterAttackIngester(characterManager.CharacterStats.Power + power);
         return ingester;
     }
 }

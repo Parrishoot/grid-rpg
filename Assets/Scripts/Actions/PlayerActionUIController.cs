@@ -34,7 +34,6 @@ public class PlayerActionUIController : MonoBehaviour
 
         button.onClick.AddListener(delegate() {
                 actionController.Activate();
-                parentPanelTweener.Close();
             }
         );
 

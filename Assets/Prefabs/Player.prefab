@@ -1038,7 +1038,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d870eb4d1aeb3904bbd3d279a1a0e527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterManager: {fileID: 0}
   confirmButton: {fileID: 8456779031870984022}
+  actionSetPanelUITweener: {fileID: 7626587234420386835}
 --- !u!114 &1455084311442237437
 MonoBehaviour:
   m_ObjectHideFlags: 0

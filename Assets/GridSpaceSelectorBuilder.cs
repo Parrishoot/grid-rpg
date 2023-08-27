@@ -8,9 +8,13 @@ where TBuilder: GridSpaceSelectorBuilder<T, TBuilder>
 {
     protected GridFilter gridFilter = new GridFilter();
 
-    protected ISelectableIngester ingester;
+    protected SelectableIngester ingester;
 
-    public GridSpaceSelectorBuilder(ISelectableIngester ingester) {
+    protected int numSelections = 1;
+
+    protected bool exact = true;
+
+    public GridSpaceSelectorBuilder(SelectableIngester ingester) {
         this.ingester = ingester;
     }
 
@@ -21,6 +25,16 @@ where TBuilder: GridSpaceSelectorBuilder<T, TBuilder>
 
     public TBuilder WithFilter(GridFilter filter) {
         this.gridFilter = filter;
+        return (TBuilder) this;
+    }
+
+    public TBuilder WithNumSelections(int numSelections) {
+        this.numSelections = numSelections;
+        return (TBuilder) this;
+    }
+
+    public TBuilder WithExact(bool exact) {
+        this.exact = exact;
         return (TBuilder) this;
     }
 

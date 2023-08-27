@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: BasicWalkAbility
   m_EditorClassIdentifier: 
   range: 3
+  distanceWalked: 0

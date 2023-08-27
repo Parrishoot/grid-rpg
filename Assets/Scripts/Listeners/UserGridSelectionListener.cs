@@ -3,29 +3,25 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Linq;
+using System.Threading.Tasks;
 
 public class UserGridSelectionListener: UserConfirmGridSpaceSelector {
 
-    private int numTargets = 1;
+    public UserGridSelectionListener(SelectableIngester ingester, GridFilter gridFilter, PlayerSelectionController playerSelectionController, int numTargets = 1, bool exact = true) : base(ingester, gridFilter, playerSelectionController, numTargets, exact) {
 
-    private bool exact = false;
-
-    public UserGridSelectionListener(ISelectableIngester ingester, int numTargets, bool exact, GridFilter gridFilter, PlayerSelectionController playerSelectionController): base(ingester, gridFilter, playerSelectionController) {
-        this.numTargets = numTargets;
-        this.exact = exact;
     }
 
     public override bool SelectionFinished() {
 
-        if(selections.Count == 0) {
+        if(ingester.GetSelections().Count == 0) {
             return false;
         }
 
         if(exact) {
-            return selections.Count == numTargets;
+            return ingester.GetSelections().Count == numSelections;
         }
         else {
-            return selections.Count <= numTargets;
+            return ingester.GetSelections().Count <= numSelections;
         }
     }
 
@@ -34,20 +30,32 @@ public class UserGridSelectionListener: UserConfirmGridSpaceSelector {
         SetEnabledSelectables();
     }
 
+    public void SetEnabledSelectables() {
+        List<GridSpaceSelectable> selectableSpaces = GetSelectableSpaces();
+
+        foreach(GridSpaceSelectable gridSpaceSelectable in selectableSpaces) {
+            gridSpaceSelectable.SetSelectable(selectableSpaces.Contains(gridSpaceSelectable));
+        }
+    }
+
     public override void Select(GridSpaceSelectable gridSpace) {
-        if(selections.Count != numTargets) {
+        if(ingester.GetSelections().Count != numSelections) {
             base.Select(gridSpace);
         }
-        else if(numTargets == 1) {
-            GridSpaceSelectable previousGridSpace = selections.Pop();
+        else if(numSelections == 1) {
+            GridSpaceSelectable previousGridSpace = ingester.RemoveSelection();
             previousGridSpace.Deselect();
             base.Select(gridSpace);
+        }
+
+        if(!SelectionFinished()) {
+            SetEnabledSelectables();
         }
     }
 
     public override void Deselect() {
-        if(selections.Count != 0) {
-            GridSpaceSelectable selectable = selections.Pop();
+        if(ingester.GetSelections().Count != 0) {
+            GridSpaceSelectable selectable = ingester.RemoveSelection();
             selectable.Deselect();
         }
         Cancel();

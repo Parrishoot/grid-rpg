@@ -7,6 +7,8 @@ public class WalkAbility : UserInputAbility
 {
     public int range;
 
+    public int distanceWalked = 0;
+
     public override string GetDescription()
     {
         string rangeText = range >= 1 ? "Spaces" : "Space";
@@ -17,13 +19,30 @@ public class WalkAbility : UserInputAbility
     protected override GridFilter GetFilter(CharacterManager characterManager)
     {
         GridFilter gridFilter = new GridFilter();
-        gridFilter.AddFilter(new WalkableRangeFilter(characterManager.CharacterGridMover.CurrentGridPos, range));
+        gridFilter.AddFilter(new WalkableRangeFilter(characterManager.CharacterGridMover.CurrentGridPos, range, characterManager.CharacterGridMover.GetPathTracker()));
 
         return gridFilter;
     }
 
-    protected override ISelectableIngester GetIngester(CharacterManager characterManager)
+    protected override SelectableIngester GetIngester(CharacterManager characterManager)
     {
-        return new CharacterWalkIngester(characterManager.CharacterGridMover, characterManager.CharacterTurnController);
+        return new CharacterWalkIngester(characterManager.CharacterGridMover, this, characterManager.CharacterTurnController);
+    }
+
+    public override void Reset()
+    {
+        base.Reset();
+
+        distanceWalked = 0;
+    }
+
+    protected override int GetNumberOfTargets()
+    {
+        return int.MaxValue;
+    }
+
+    protected override bool GetExactSelection()
+    {
+        return false;
     }
 }

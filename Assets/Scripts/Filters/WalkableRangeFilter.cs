@@ -1,30 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class WalkableRangeFilter : RangeFilter
 {
-    public WalkableRangeFilter(Vector2Int origin, int range, bool countDiagonals = false) : base(origin, range, countDiagonals)
-    {
+    private PathTracker currentPathTracker;
 
+    public WalkableRangeFilter(Vector2Int origin, int range, PathTracker currentPathTracker, bool countDiagonals = false) : base(origin, range, countDiagonals)
+    {
+        this.currentPathTracker = currentPathTracker;
     }
 
     public override bool Filter(GridSpaceSelectable gridSpace)
     {
-        bool inRange = base.Filter(gridSpace);
 
-        if(!inRange) {
+        List<Vector2Int> currentPath = currentPathTracker.GetPath();
+        int remainingDistance = range - (Mathf.Max(currentPath.Count - 1, 0));
+
+        if(remainingDistance <= 0) {
             return false;
         }
 
         List<PathNode> path = null;
+        Vector2Int startingPosition = currentPath.Count.Equals(0) ? origin : currentPath.Last();
 
-        if(GetDistance(gridSpace) <= range) {
-            path = GridManager.GetInstance().FindPath(origin, gridSpace.Space.CellCoords, range);
-        }
+        path = GridManager.GetInstance().FindPath(startingPosition, gridSpace.Space.CellCoords, range);
 
-        gridSpace.SetPath(path);
-        
-        return path != null;
+        return path != null && path.Count <= remainingDistance;
     }
 }

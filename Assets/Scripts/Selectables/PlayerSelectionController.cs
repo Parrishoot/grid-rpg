@@ -11,27 +11,31 @@ public class PlayerSelectionController : CharacterSelectionController
     public Button confirmButton;
 
     public UserConfirmGridSpaceSelector Listener { get; set; }
+
+    public UITweener actionSetPanelUITweener;
     
     void Update() {
         CheckForMouseClickOnSelectable();
-
         CheckEnableDisableUI();
     }
 
     public void ProcessListenerSelections() {
         Listener.ProcessSelections();
+        actionSetPanelUITweener.Open();
         Listener = null;
     }
 
     public void EndListening() {
         if(Listener != null) {
             Listener.Cancel();
+            actionSetPanelUITweener.Open();
             Listener = null;
         }
     }
 
     public void AssignListener(UserConfirmGridSpaceSelector selectableListener) {
         Listener = selectableListener;
+        actionSetPanelUITweener.Close();
     }
 
     private void CheckForMouseClickOnSelectable() {
@@ -57,6 +61,8 @@ public class PlayerSelectionController : CharacterSelectionController
     }
 
     private void CheckEnableDisableUI() {
+
+        // Check if the confirm button should be enabled
         if(Listener != null && Listener.SelectionFinished()) {
             confirmButton.gameObject.SetActive(true);
         }
@@ -69,16 +75,17 @@ public class PlayerSelectionController : CharacterSelectionController
         return FindObjectsOfType<GridSpaceSelectable>();
     }
 
-    public override GridSpaceSelector GetSelectAllSelector(ISelectableIngester ingester, GridFilter gridFilter)
+    public override GridSpaceSelector GetSelectAllSelector(SelectableIngester ingester, GridFilter gridFilter)
     {
         return new GridAutoSelectorBuilder(ingester, this).WithFilter(gridFilter)
                                                           .Build();
     }
 
-    public override GridSpaceSelector GetSelector(ISelectableIngester ingester, GridFilter gridFilter, int numTargets = 1)
+    public override GridSpaceSelector GetSelector(SelectableIngester ingester, GridFilter gridFilter, int numTargets = 1, bool exact = true)
     {
         return new UserGridSelectionListenerBuilder(ingester, this).WithFilter(gridFilter)
-                                                                   .WithNumTargets(numTargets)
+                                                                   .WithNumSelections(numTargets)
+                                                                   .WithExact(exact)
                                                                    .Build();
     }
 

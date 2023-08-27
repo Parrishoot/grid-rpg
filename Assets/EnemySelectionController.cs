@@ -15,15 +15,17 @@ public class EnemySelectionController : CharacterSelectionController
         return new OccupantFilter<PlayerSelectable>();
     }
 
-    public override GridSpaceSelector GetSelectAllSelector(ISelectableIngester ingester, GridFilter gridFilter)
+    public override GridSpaceSelector GetSelectAllSelector(SelectableIngester ingester, GridFilter gridFilter)
     {
         throw new System.NotImplementedException();
     }
 
-    public override GridSpaceSelector GetSelector(ISelectableIngester ingester, GridFilter gridFilter, int numTargets = 1)
+    public override GridSpaceSelector GetSelector(SelectableIngester ingester, GridFilter gridFilter, int numTargets = 1, bool exact = true)
     {
         ingester.OnIngestionFinished.AddOnEvent(characterManager.CharacterTurnController.EndTurn);
         return new EnemyRandomGridSelectorBuilder(ingester).WithFilter(gridFilter)
+                                                           .WithNumSelections(numTargets)
+                                                           .WithExact(exact)
                                                            .Build();
     }
 }

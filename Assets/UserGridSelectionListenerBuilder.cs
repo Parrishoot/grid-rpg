@@ -7,13 +7,13 @@ public class UserGridSelectionListenerBuilder : UserGridSelectionListenerBuilder
 
     private PlayerSelectionController playerSelectionController;
 
-    public UserGridSelectionListenerBuilder(ISelectableIngester ingester, PlayerSelectionController playerSelectionController) : base(ingester)
+    public UserGridSelectionListenerBuilder(SelectableIngester ingester, PlayerSelectionController playerSelectionController) : base(ingester)
     {
         this.playerSelectionController = playerSelectionController;
     }
 
     public override UserGridSelectionListener Build()
     {
-        return new UserGridSelectionListener(ingester, numTargets, exact, gridFilter, playerSelectionController);
+        return new UserGridSelectionListener(ingester, gridFilter, playerSelectionController, numSelections, exact);
     }
 }

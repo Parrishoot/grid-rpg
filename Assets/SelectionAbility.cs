@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class SelectionAbility : Ability
 {
-    
+
     protected abstract GridSpaceSelector GetSpaceSelector(CharacterManager characterManager);
 
     public override void Apply(CharacterManager characterManager) {
@@ -13,5 +13,13 @@ public abstract class SelectionAbility : Ability
     
     protected abstract GridFilter GetFilter(CharacterManager characterManager);
  
-    protected abstract ISelectableIngester GetIngester(CharacterManager characterManager);
+    protected abstract SelectableIngester GetIngester(CharacterManager characterManager);
+
+    protected virtual int GetNumberOfTargets() {
+        return 1;
+    }
+
+    protected virtual bool GetExactSelection() {
+        return true;
+    }
 }

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class EnemyRandomGridSelector : GridSpaceSelector
 {
-    private int numSelections;
 
-    public EnemyRandomGridSelector(ISelectableIngester ingester, GridFilter gridFilter, int numSelections = 1) : base(ingester, gridFilter)
+    public EnemyRandomGridSelector(SelectableIngester ingester, GridFilter gridFilter, int numSelections = 1, bool exact = true) : base(ingester, gridFilter, numSelections, exact)
     {
-        this.numSelections = numSelections;
+
     }
 
     public override void GatherSelections()
@@ -16,21 +15,23 @@ public class EnemyRandomGridSelector : GridSpaceSelector
 
         List<GridSpaceSelectable> selections = GetSelectableSpaces();
 
-        if(selections.Count <= numSelections) {
-            ProcessSelections(selections);
+        if(selections.Count <= numSelections && exact) {
+            ingester.AddSelections(selections);
+            ProcessSelections();
             return;
         }
 
-        List<GridSpaceSelectable> randomSelections = new List<GridSpaceSelectable>(); 
+        int selected = 0;
 
-        while(randomSelections.Count < numSelections) {
+        while((selected < numSelections && exact) || (selected == 0 && !exact)) {
             GridSpaceSelectable selection = selections[Random.Range(0, selections.Count - 1)];
 
-            if(!randomSelections.Contains(selection)) {
-                randomSelections.Add(selection);
+            if(!ingester.GetSelections().Contains(selection)) {
+                ingester.AddSelection(selection);
+                selected++;
             }
         }
 
-        ingester.ProcessSelections(randomSelections);
+        ingester.ProcessSelections();
     }
 }

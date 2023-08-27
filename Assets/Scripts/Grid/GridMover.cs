@@ -16,6 +16,8 @@ public class GridMover : MonoBehaviour
 
     private Queue<Vector2Int> path = new Queue<Vector2Int>();
 
+    private PathTracker pathTracker = new PathTracker();
+
     public delegate void OnDestinationReached(); 
     OnDestinationReached onDestinationReached;
 
@@ -42,11 +44,13 @@ public class GridMover : MonoBehaviour
         }
         else if (CurrentGridPos != TargetGridPos) {
 
+            CurrentGridPos = TargetGridPos;
+            pathTracker = new PathTracker();
+
             onDestinationReached?.Invoke();
             onDestinationReached = null;
 
             gridManager.GetGridSpaceAtCell(TargetGridPos).SetOccupant(selectable);
-            CurrentGridPos = TargetGridPos;
         }
         
     }
@@ -74,7 +78,6 @@ public class GridMover : MonoBehaviour
             onDestinationReached += onDestinationReachedEvent;
         }
 
-
         this.path = new Queue<Vector2Int>(path);
         TargetGridPos = this.path.Dequeue();
     }
@@ -92,5 +95,9 @@ public class GridMover : MonoBehaviour
         gridManager.GetGridSpaceAtCell(TargetGridPos).SetOccupant(selectable);
 
         transform.position = gridManager.GetCellPos(CurrentGridPos, transform.position.y);
+    }
+
+    public PathTracker GetPathTracker() {
+        return pathTracker;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridAutoSelector : UserConfirmGridSpaceSelector
 {
-    public GridAutoSelector(ISelectableIngester ingester, GridFilter gridFilter, PlayerSelectionController playerSelectionController) : base(ingester, gridFilter, playerSelectionController)
+    public GridAutoSelector(SelectableIngester ingester, GridFilter gridFilter, PlayerSelectionController playerSelectionController) : base(ingester, gridFilter, playerSelectionController)
     {
 
     }
